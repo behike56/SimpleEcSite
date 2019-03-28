@@ -1,2 +1,2 @@
-# SmallEcSite
+# SimpleEcSIte
 develop-term
