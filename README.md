@@ -1,16 +1,18 @@
-SimpleEcSIte
+# SimpleEcSIte
 develop-term
 
-アイデア企画
+## アイデア企画
 １〜６は、「product_planning/idea-mvp.md」に記述。
 
-アイディア出し
-ペルソナの作成
-リーンキャンバスの作成
-エレベータピッチの作成
-ユーザーストーリーマッピング
-MVP(Minimum Viable Product)選定
-７は、「product_planning/wire-frame/*.png」に記述。 ７. ワイヤーフレームの作成
+1. アイディア出し
+2. ペルソナの作成
+3. リーンキャンバスの作成
+4. エレベータピッチの作成
+5. ユーザーストーリーマッピング
+6. MVP(Minimum Viable Product)選定
+
+７は、「product_planning/wire-frame/*.png」に記述。 
+７. ワイヤーフレームの作成
 
 ## branch
 * master
