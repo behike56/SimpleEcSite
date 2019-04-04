@@ -1,8 +1,8 @@
-#SimpleEcSIte
-##develop-term
+# SimpleEcSIte
+## develop-term
 
-###アイデア企画
-１〜６は、「product_planning/idea-mvp.md」に記述。
+### アイデア企画
+*１〜６は、`「product_planning/idea-mvp.md」`に記載。*
 
 1. アイディア出し
 2. ペルソナの作成
@@ -12,46 +12,29 @@
 6. MVP(Minimum Viable Product)選定
 7. ワイヤーフレームの作成
 
-*７は、`「product_planning/wire-frame/*.png」`に記述。*
+*７は、`「product_planning/wire-frame/*.png」`に記載。*
 
-##branch
+## branches
 - master
 - page
 - payment
 - account
 - future
 
-###master
+
+### master
 開発の本流。
 
-###page
-主に表示するだけのページを担当。
+### pages
+担当機能：商品の表示
 
-- トップページ
-- 商品詳細ページ
-- カート機能
-- カートの中身ページ
-- テーブル：商品（在庫）テーブル、カートテーブル
+### payment
+担当機能：購入と決済
 
-###payment
-一連の決済機能を担当。
+### account
+担当機能：アカウント登録とログイン
 
-- 住所と発送方法の選択ページ
-- 合計金額の表示と支払い方法の選択ページ
-- 決済機能（在庫の減少、メールの送信）
-- サンクスページ
+### future
+担当機能：追加予定の機能
 
-*テーブル：アカウントテーブル、商品（在庫）テーブル、カートテーブル
-*
-###account
-ログイン機能とアカウント作成機能を担当。
-
-- ログインページ
-- ログイン機能
-- アカウント登録ページ
-- アカウント登録機能
-
-*テーブル：アカウントテーブル*
-
-###future
-追加機能を担当。
+**機能の詳細は`「product_planning/機能一覧.md」`に記載**
