@@ -16,7 +16,8 @@
 
 ## branches
 - master
-- page
+- items
+- cart
 - payment
 - account
 - future
@@ -25,8 +26,11 @@
 ### master
 開発の本流。
 
-### pages
+### items
 担当機能：商品の表示
+
+### cart
+担当機能：カート機能
 
 ### payment
 担当機能：購入と決済
