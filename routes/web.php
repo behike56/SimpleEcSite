@@ -13,9 +13,6 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 /**
  * 商品の表示
@@ -23,6 +20,6 @@ Route::get('/', function () {
  * 商品詳細
  * branch - items
  **/
-Route::get('/', 'ItemsController@index');
+Route::get('/', 'User\ItemController@itemList');
 
 Route::get('/detail', 'ItemsController@detail');

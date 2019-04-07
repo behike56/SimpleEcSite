@@ -16,7 +16,16 @@
 	<style type="text/css">
 	 <!--
 	 /*ここに調整CSS記述*/
-
+	 .cart-info {
+	     padding: 0.5em 1em;
+	     margin: 2em 0;
+	     background: #f0f7ff;
+	     border: dashed 2px #5b8bd0;/*点線*/
+	 }
+	 .cart-info p {
+	     margin: 0; 
+	     padding: 0;
+	 }
 	 -->
 	</style>
     </head>
@@ -49,31 +58,31 @@
 		    </div>
 
 		    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-			<div class="cart-info"><h2>カート：個数＆金額</divh2></div>
-                        <!-- Authentication Links -->
-                        {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
-                        @guest
-                        <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                        {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                    <ul class="navbar-nav navbar-right  ml-auto">
+			<li><div class="cart-info"><h2>カート：個数＆金額</divh2></div>
+                            <!-- Authentication Links -->
+                            {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
+                            @guest
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                            <li class="nav-item dropdown">
+				<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+				</a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+					{{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					@csrf
+                                    </form>
+				</div>
+                            </li>
                         @endguest
                     </ul>
 		    
