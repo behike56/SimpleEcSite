@@ -22,4 +22,20 @@ Auth::routes();
  **/
 Route::get('/', 'User\ItemController@itemList');
 
-Route::get('/detail', 'ItemsController@detail');
+Route::get('/detail', 'ItemController@detail');
+
+
+/**
+ * 商品の追加
+ * 管理者による機能は追加改修予定
+ * branch - items
+ **/
+Route::get('admin', 'Admin\ItemCreateController@index');
+
+Route::get('admin/create', 'Admin\ItemCreateController@add');
+Route::post('admin/create', 'Admin\ItemCreateController@create');
+
+Route::get('admin/edit', 'Admin\ItemCreateController@edit');
+Route::post('admin/edit', 'Admin\ItemCreateController@update');
+
+Route::get('admin/delete', 'Admin\ItemCreateController@delete');

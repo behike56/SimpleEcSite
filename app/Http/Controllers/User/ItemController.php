@@ -17,4 +17,5 @@ class ItemController extends Controller
     {
 	return view('items.items');
     }
+    
 }
