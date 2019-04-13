@@ -50,8 +50,7 @@
 		    
 		    <div class="collapse navbar-collapse" id="navbarEexample2">
 			<ul class="nav navbar-nav">
-			    <li class="active"><a href="#">menuA</a></li>
-
+			    <li><a href="#">menuA</a></li>
 			    <li><a href="#">menuB</a></li>
 			    <li><a href="#">menuC</a></li>
 			</ul>
@@ -59,37 +58,19 @@
 
 		    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav navbar-right  ml-auto">
-			<li><div class="cart-info"><h2>カート：個数＆金額</divh2></div>
-                            <!-- Authentication Links -->
-                            {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
-                            @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
-                        @else
-                            <li class="nav-item dropdown">
-				<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-				</a>
-
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-					{{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-					@csrf
-                                    </form>
-				</div>
-                            </li>
-                        @endguest
+			<li>
+			    <!-- Authentication Links -->
+			    <p>ログイン</p>
+			</li>
+			<li>
+			    <div class="cart-info">
+				<h2>カート：個数＆金額</h2>
+			    </div>
+			</li>
                     </ul>
-		    
 		</div>
 	    </nav>
-	    
-	</div> <!-- /container -->
+	</div>
     </body>
 </html>
 
