@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-Use App\Items;
+use App\Items;
 
 use Carbon\Carbon;
 
@@ -36,18 +36,36 @@ class ItemCreateController extends Controller
 	$items = new Items;
 	$form = $request->all();
 
+	$imageNow = Carbon::now();
+
 
 	if (isset($form['items_image'])) {
-            $path = $request->file('items_image')->store('public/image');
-            $items->items_image = basename($path);
+            $path = $request->file('items_image')->getClientOriginalName();
+	    $trueName = $imageNow->format('Y-m-d_H:i:s').$path;
+	    $request->file('items_image')->storeAs('public/image/', $trueName);
+
+            
 	} else {
             $items->items_image = null;
 	}
+	
+	unset($form['_token']);
+	/* 	unset($form['items_image']); */
+	$items->timestamps = false;
 
-	$items->fill($form);
+	$items->fill([
+	    'items_name' => $form['items_name'],
+	    'items_image' => $trueName,
+	    'flowering_time' => $form['flowering_time'],
+	    'full_length' => $form['full_length'],
+	    'descriptions' => $form['descriptions'],
+	    'stock' => $form['stock'],
+	    'price' => $form['price']
+	]);
+	
 	$items->save();
 	
-	return redirect('admin');
+	return redirect('admin', ['']);
     }
 
     /**

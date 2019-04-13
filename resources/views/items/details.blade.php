@@ -1,58 +1,54 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ページタイトル</title>
+@extends('items.items')
+@section('title', '商品詳細')
 
-	<!--Bootstrap assets -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<!--自作CSS -->
-	<style type="text/css">
-	 <!--
-	 /*ここに調整CSS記述*/
-
-	 -->
-	</style>
-    </head>
-
-    <body>
-	<div class="container">
-
-	    <!-- main -->
-	    <div class="col-md-9">
-		<!-- apply custom style -->
-		<div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
-		    <h1><small>タイトル</small></h1>
+@section('content')
+    <div class="container-fluid">
+	<div class="row">
+	    <div class="col-md-6">
+		<img src="{{ asset('storage/image/' . $form->items_image) }}" class="img-rounded" width="100%" height="100%">
+			  </div>
+			  <div class="col-md-6">
+		<table class="table table-striped">
+		    <thead>
+			<tr>
+			    <th width="100px">商品詳細</th>
+			</tr>
+		    </thead>
+		    <tr>
+			<td>商品名</td>
+			<td>{{ $form->items_name }}</td>
+		    </tr>
+		    <tr>
+			<td>開花時期</td>
+			<td>{{ $form->flowering_time }}</td>
+		    </tr>
+		    <tr>
+			<td>最大の全長</td>
+			<td>{{ $form->full_length }}</td>
+		    </tr>
+		    <tr>
+			<td>詳細</td>
+			<td>{{ $form->descriptions }}</td>
+		    </tr>
+		</table>
+		<div class="well well-lg">
+		    <p>在庫：{{ $form->stock }}</p>
+		    <p>価格：{{ $form->price }}</p>
+		    <form class="form-inline">
+			<div class="form-group">
+			    <label class="sr-only" for="InputEmail">金額</label>
+			    <div class="input-group">
+				<span class="input-group-addon">個数</span>
+				<input type="text" class="form-control">
+				<span class="input-group-addon">個</span>
+			    </div>
+			</div>
+			<button type="submit" class="btn btn-default">カートに入れる</button>
+		    </form>
+			
 		</div>
-		
-		<form class="form-horizontal">
-		    <div class="form-group">
-			<label for="name1" class="col-md-3 control-label">お名前</label>
-			<div class="col-sm-9"><input type="text" class="form-control" id="name1"></div>
-		    </div>
-		    <div class="form-group">
-			<label for="mail1" class="col-md-3 control-label">メールアドレス</label>
-			<div class="col-sm-9"><input type="email" class="form-control" id="mail1"></div>
-		    </div>
-		    <div class="form-group">
-			<label for="ask1" class="col-md-3 control-label">お問い合わせ内容</label>
-			<div class="col-md-9"><textarea rows="5" class="form-control" id="ask1"></textarea></div>
-		    </div>
-		    
-		    <div class="col-md-offset-3 text-center"><button class="btn btn-primary">送信</button></div>
-		</form>
-		
 	    </div>
-
-	</div> <!-- /container -->
-    </body>
-</html>
-
-
-
-
+	    
+	</div>
+    </div>
+@endsection

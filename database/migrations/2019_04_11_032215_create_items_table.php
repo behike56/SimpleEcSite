@@ -23,7 +23,6 @@ class CreateItemsTable extends Migration
 	    $table->unsignedTinyInteger('stock');
 	    $table->unsignedTinyInteger('price');
 	    $table->timestamp('created_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_time')->default(\DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 

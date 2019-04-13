@@ -6,14 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Items extends Model
 {
-    protected $guarded = array('id');
 
-    public static $rules = array(
-        'items_name' => 'required',
-        'descriptions' => 'required',
-	'items_image' => 'required',
+    /**
+     * 複数代入しない属性
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
+
+    /**
+     * 複数代入する属性
+     *
+     * @var array
+     */
+    protected $fillable = [
+	'items_name',
+	'items_image',
+	'flowering_time',
+	'full_length',
+	'descriptions',
+	'stock',
+	'price'
+    ];
+
+    public static $rules = [
+	'items_name' => 'required',
+	'descriptions' => 'required',
 	'stock' => 'required',
-	'price' => 'required',
-	
-    );
+	'price' => 'required'	
+    ];
 }

@@ -20,9 +20,11 @@ Auth::routes();
  * 商品詳細
  * branch - items
  **/
-Route::get('/', 'User\ItemController@itemList');
+Route::get('/', 'Items\ItemsController@itemList');
+Route::get('material', 'Items\ItemsController@materialList');
 
-Route::get('/detail', 'ItemController@detail');
+
+Route::get('/detail', 'Items\ItemsController@detail');
 
 
 /**

@@ -14,6 +14,7 @@ yarn-error.log
 doc/
 *.swp
 *~
+.ac-php-conf.json
 .project
 .idea
 .secret

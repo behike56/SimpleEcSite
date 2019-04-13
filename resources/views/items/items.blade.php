@@ -29,7 +29,7 @@
 		</div>
 		<div class="col-md-10">
 		    <!-- コンテンツ -->
-		    @include('items.item_list')
+		    @yield('content')
 		</div>
 	    </div>
 	</div>

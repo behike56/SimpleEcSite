@@ -12,11 +12,11 @@
 		    <table class="table table-dark">
 			<thead>
 			    <tr>
-				<th width="10%">ID</th>
-				<th width="15%">名前</th>
+				<th width="5%">ID</th>
+				<th width="10%">名前</th>
 				<th width="10%">時期</th>
 				<th width="10%">高さ</th>
-				<th width="25%">詳細</th>
+				<th width="35%">詳細</th>
 				<th width="20%">画像</th>
 				<th width="5%">在庫</th>
 				<th width="5%">価格</th>
@@ -26,11 +26,11 @@
 			    @foreach($form as $infos)
 				<tr>
 				    <td>{{ $infos->id }}</td>
-				    <td>{{ str_limit($infos->name, 20) }}</td>
-				    <td>{{ $infos->time }}</td>
-				    <td>{{ $infos->height }}</td>
-				    <td>{{ str_limit($infos->description, 100) }}</td>
-				    <td>{{ $infos->image }}</td>
+				    <td>{{ str_limit($infos->items_name, 20) }}</td>
+				    <td>{{ $infos->flowering_time }}</td>
+				    <td>{{ $infos->full_length }}</td>
+				    <td>{{ str_limit($infos->descriptions, 100) }}</td>
+				    <td>{{ $infos->items_image }}</td>
 				    <td>{{ $infos->stock }}</td>
 				    <td>{{ $infos->price }}</td>
 				    <td>
