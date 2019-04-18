@@ -70,6 +70,6 @@
                     <input type="submit" class="btn btn-primary" value="追加">
                 </form>
             </div>
-        </div>
+	</div>
     </div>
 @endsection

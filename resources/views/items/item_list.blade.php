@@ -2,15 +2,11 @@
 @section('title', '商品一覧')
 
 @section('content')
-    <!-- main -->
     <div class="col-md-12">
-	<!-- apply custom style -->
 	<div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
 	    <h1><small>商品一覧</small></h1>
 	</div>	
 	<div class="row">
-	    
-	    <!-- この単位を繰り返す -->
 	    @foreach($form as $infos)
 		<div class="col-xs-10 col-md-4">
 		    <div class="thumbnail" style="text-align:center; padding-top:10px; padding-bottom: 10px;">
@@ -27,7 +23,7 @@
 			</div>
 		    </div>
 		</div>
-	    @endforeach	    
+	    @endforeach
 	</div>
     </div>
 @endsection

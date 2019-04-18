@@ -1,9 +1,7 @@
-<!-- side bar -->
 <div class="panel panel-default">
     <div class="panel-heading">
 	商品カテゴリー
     </div>
-    <!-- <div class="panel-body"> -->
     <ul class="nav nav-pills nav-stacked">
 	<li>
 	    <a href="{{ url('/') }}">
@@ -18,5 +16,4 @@
 	    </a>
 	</li>
     </ul>
-    <!-- </div> -->
 </div>

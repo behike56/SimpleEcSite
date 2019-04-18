@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -7,20 +6,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ページタイトル</title>
 
-	<!--Bootstrap assets -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-	<!--自作CSS -->
 	<style type="text/css">
 	 <!--
-	 /*ここに調整CSS記述*/
 	 .cart-info {
 	     padding: 0.5em 1em;
 	     margin: 2em 0;
 	     background: #f0f7ff;
-	     border: dashed 2px #5b8bd0;/*点線*/
+	     border: dashed 2px #5b8bd0;
 	 }
 	 .cart-info p {
 	     margin: 0; 
@@ -29,10 +25,8 @@
 	 -->
 	</style>
     </head>
-
     <body>
 	<div class="container">
-	    
 	    <!-- header & grobal navi -->
 	    <nav class="navbar navbar-default" style="background-color: #FFFFFF;">
 		<div class="container-fluid">
@@ -47,7 +41,6 @@
 			    <h1>Simple Garden</h1>
 			</a>
 		    </div>
-		    
 		    <div class="collapse navbar-collapse" id="navbarEexample2">
 			<ul class="nav navbar-nav">
 			    <li><a href="#">menuA</a></li>

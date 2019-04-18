@@ -2,9 +2,7 @@
 @section('title', '追加予定')
 
 @section('content')
-    <!-- main -->
     <div class="col-md-12">
-	<!-- apply custom style -->
 	<div class="page-header" style="margin-top:-30px;padding-bottom:0px;">
 	    <h1><small>追加予定</small></h1>
 	</div>	
