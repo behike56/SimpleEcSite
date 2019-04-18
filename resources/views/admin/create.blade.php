@@ -20,13 +20,13 @@
                             <input type="text" class="form-control" name="items_name" value="{{ old('items_name') }}">
                         </div>
                     </div>
-		    <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-md-2" for="flowering_time">時期</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="flowering_time" value="{{ old('flowering_time') }}">
                         </div>
                     </div>
-		    <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-md-2" for="full_length">全長</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="full_length" value="{{ old('full_length') }}">
@@ -38,7 +38,7 @@
                             <textarea class="form-control" name="descriptions" rows="10">{{ old('descriptions') }}</textarea>
                         </div>
                     </div>
-		    <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-md-2" for="stock">在庫</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="stock" value="{{ old('stock') }}">
@@ -50,7 +50,7 @@
                             <input type="text" class="form-control" name="price" value="{{ old('price') }}">
                         </div>
                     </div>
-		    <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-md-2" for="items_image">画像</label>
                         <div class="col-md-10">
                             <input type="file" class="form-control-file" accept="image/*" name="items_image">
@@ -60,6 +60,6 @@
                     <input type="submit" class="btn btn-primary" value="追加">
                 </form>
             </div>
-	</div>
+        </div>
     </div>
 @endsection
