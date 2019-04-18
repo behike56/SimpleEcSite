@@ -23,8 +23,8 @@
                             </tr>
                         </thead>
                         <tbody>
-			    @foreach($form as $infos)
-				<tr>
+                            @foreach($form as $infos)
+                                <tr>
                                     <td>{{ $infos->id }}</td>
                                     <td>{{ str_limit($infos->items_name, 20) }}</td>
                                     <td>{{ $infos->flowering_time }}</td>
