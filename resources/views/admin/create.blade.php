@@ -42,9 +42,7 @@
                             <textarea class="form-control" name="descriptions" rows="10">{{ old('descriptions') }}</textarea>
                         </div>
                     </div>
-		    
 
-		    
 		    <div class="form-group row">
                         <label class="col-md-2" for="stock">在庫</label>
                         <div class="col-md-10">
