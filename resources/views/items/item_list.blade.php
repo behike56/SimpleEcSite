@@ -18,9 +18,21 @@
                             <p>開花時期：{{ str_limit($infos->flowering_time, 20) }}</p>
                             <p>全長：{{ $infos->full_length }}</p><p>在庫：{{ $infos->stock }}</p>
                             <p>価格：{{ $infos->price }}</p>
-                            <p style="margin-bottom:0px">
-                                <a href="" class="btn btn-primary">カートに追加</a>
-                            </p>
+                            <form class="form-inline" method="post" action="{{ url('/additem') }}">
+                                <div class="form-group">
+                                    <label class="sr-only" for="InputSelect">選択</label>
+		                                <select class="form-control" id="InputSelect" name="quantity">
+                                        @for($quantity = 1; $quantity <= $infos->stock; $quantity++)
+                                            <option value="{{$quantity}}">{{ $quantity }}個</option>
+                                        @endfor
+		                                </select>
+	                              </div>
+                                <input type="hidden" name="id" value="{{$infos->id}}">
+                                <button type="submit" class="btn btn-default">
+                                    カートに追加する
+                                </button>
+                                {{ csrf_field() }}
+                            </form>
                         </div>
                     </div>
                 </div>

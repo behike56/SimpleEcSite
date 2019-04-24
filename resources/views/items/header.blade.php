@@ -6,20 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ページタイトル</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-        <style type="text/css">
-	 <!--
-	 .cart-info {
-	     padding: 0.5em 1em;
-	     margin: 2em 0;
-	     background: #f0f7ff;
-	     border: dashed 2px #5b8bd0;
-	 }
-	 .cart-info p {
-	     margin: 0; 
-	     padding: 0;
-	 }
-	 -->
-	</style>
     </head>
     <body>
         <div class="container">
@@ -43,19 +29,27 @@
                             <li><a href="#">menuC</a></li>
                         </ul>
                     </div>
-                    <ul class="navbar-nav navbar-right  ml-auto">
-                        <li><p>ログイン</p></li>
-                        <li>
-                            <div class="cart-info">
-                                <h2>カート：個数＆金額</h2>
-                            </div>
-                        </li>
-                    </ul>
+                    <button type="button" class="btn btn-primary btn-lg btn-block active">
+                        <a href="{{ action('Cart\CartController@resetCart') }}">
+                            削除
+                        </a>
+                    </button>
+                    <div style="float:right;">
+                        <p>ログイン</p>
+                        <div class="panel panel-success" style="width:150px">
+	                          <div class="panel-heading">
+                                <a href="{{ url('/displayCart') }}">
+		                                買い物カゴ
+                                </a>
+	                          </div>
+	                          <div class="panel-body">
+	                          </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </body>
 </html>
 

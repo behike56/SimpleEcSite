@@ -39,3 +39,13 @@ Route::get('admin/edit', 'Admin\ItemCreateController@edit');
 Route::post('admin/edit', 'Admin\ItemCreateController@update');
 
 Route::get('admin/delete', 'Admin\ItemCreateController@delete');
+
+/**
+
+ * branch - cart
+ **/
+Route::get('/displayCart', 'Cart\CartController@displayCart');
+Route::post('/additem', 'Cart\CartController@addItem');
+
+Route::get('resetCart', 'Cart\CartController@resetCart');
+

@@ -32,18 +32,23 @@
                     </tr>
                 </table>
                 <div class="well well-lg">
-                    <p>在庫：{{ $form->stock }}</p>
-                    <p>価格：{{ $form->price }}</p>
-                    <form class="form-inline">
+                    <p>在庫：{{ $form->stock }}個</p>
+                    <p>価格：{{ $form->price }}円（税別）</p>
+
+                    <form class="form-inline" method="post" action="{{ url('/additem') }}>
                         <div class="form-group">
-                            <label class="sr-only" for="InputEmail">金額</label>
+                            <label class="sr-only" for="InputEmail">個数</label>
                             <div class="input-group">
                                 <span class="input-group-addon">個数</span>
-                                <input type="text" class="form-control">
+                                <input type="hidden" value="{{$form->id}}" name="id">
+                                <input type="number" class="form-control" onInput="checkForm(this)" name="quantity" style="width:60px">
                                 <span class="input-group-addon">個</span>
                             </div>
+                            <button type="submit" class="btn btn-default">
+                                カートに入れる
+                            </button>
+                            {{ csrf_field() }}
                         </div>
-                        <button type="submit" class="btn btn-default">カートに入れる</button>
                     </form>
                 </div>
             </div>

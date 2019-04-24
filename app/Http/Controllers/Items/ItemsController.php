@@ -37,7 +37,7 @@ class ItemsController extends Controller
         $form = Items::find($request->id);
         return view('items.details',  ['form' => $form]);
     }
-    
+
     /**
      * 商材ページ
      * 追加予定機能

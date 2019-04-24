@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="ja">
     <head>
@@ -6,6 +9,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="/css/sticky-footer.css" rel="stylesheet" media="screen">
+        <!-- 独自CSS＆JS -->
+        <link href="css/form.css" rel="stylesheet" type="text/css">
+        <script src="js/onlyNumber.js" type="text/javascript"></script>
     </head>
     <body>
         @include('items.header')
