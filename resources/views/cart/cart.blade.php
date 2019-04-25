@@ -8,45 +8,42 @@
         <link href="/css/sticky-footer.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <div class="row">
-	          <div class="list-news col-md-12 mx-auto">
-                <div class="row">
-                    <table class="table table-dark">
-                        <thead>
+        @include('cart.header')
+        <div class="container">
+	          <div class="col-md-10">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="10%">商品名</th>
+                            <th width="20%">詳細</th>
+                            <th width="5%">個数</th>
+                            <th width="5%">価格</th>
+                            <th width="5%">変更</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for($i=0; $i<$countBox; $i++)
                             <tr>
-                                <th width="10%">商品名</th>
-                                <th width="60%">詳細</th>
-                                <th width="10%">個数</th>
-                                <th width="10%">価格</th>
-                                <th width="10%">変更</th>
+                                <td>{{ $carts[$i]['name'] }}</td>
+                                <td>{{ $carts[$i]['desc'] }}</td>
+                                <td>{{ $carts[$i]['qtity'] }}</td>
+                                <td>{{ $carts[$i]['price'] }}</td>
+                                <td>
+                                    <div>
+                                        <a href="">削除</a>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @php
-                                   use App\Items;
-                                   @endphp --}}
-                            @foreach($carts as $cart)
-                                <tr>
-                                    <td>{{ $cart -> name }}</td>
-                                    <td>{{ $cart -> desc }}</td>
-                                    <td>{{ $cart -> qtity }}</td>
-                                    <td>{{ $cart -> price }}</td>
-                                    <td>
-
-                                        <div>
-                                            <a href="{{ action('Cart\CartController@delete', ['id' => $cart -> cartId]) }}">削除</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div><p>合計個数</p></div>
-                    <div><p>合計価格（税抜き）</p></div>
-                </div>
+                        @endfor
+                    </tbody>
+                </table>
+                <div><p>合計個数:{{$totalQty}}個</p></div>
+                <div><p>合計価格{{$totalPriceNoTax}}円（税抜き）</p></div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+        @include('cart.footer')
     </body>
 </html>
