@@ -22,22 +22,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                use App\Items;
-                            @endphp
-                            @foreach($displayItems as $disItem)
-                                {{ $tableItems = Items::find($disItem->cartId) }}
+                            {{-- @php
+                                   use App\Items;
+                                   @endphp --}}
+                            @foreach($carts as $cart)
                                 <tr>
-                                    <td>{{ $tableItems -> items_name }}</td>
-                                    <td>{{ $tableItems -> descriptions }}</td>
-                                    <td>{{ $disItem -> cartQuantity }}</td>
-                                    <td>{{ $tableItems -> price }}</td>
+                                    <td>{{ $cart -> name }}</td>
+                                    <td>{{ $cart -> desc }}</td>
+                                    <td>{{ $cart -> qtity }}</td>
+                                    <td>{{ $cart -> price }}</td>
                                     <td>
+
                                         <div>
-                                            <a href="{{ action('Cart\CartController@edit', ['id' => $tableOfItems -> cartId]) }}">編集</a>
-                                        </div>
-                                        <div>
-                                            <a href="{{ action('Cart\CartController@delete', ['id' => $tableOfItems -> cartId]) }}">削除</a>
+                                            <a href="{{ action('Cart\CartController@delete', ['id' => $cart -> cartId]) }}">削除</a>
                                         </div>
                                     </td>
                                 </tr>

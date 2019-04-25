@@ -26,22 +26,22 @@ class CartController extends Controller
             $_SESSION['cartBox'] = [];
         }
 
+        $id = intval($request->id);
+        $qty = intval($request->quantity);
+
+        // var_dump($id);
+        // var_dump($qty);
+
         $cartInfo = [
-            'cartId' => $request->id,
-            'cartQuantity' => $request->quantity];
+            'cartId' => $id,
+            'cartQuantity' => $qty];
 
-        $_SESSION['cartBox'][] = $cartInfo;
+        $sessCart = Session::get('cartBox');
+        $sessCart[] = $cartInfo;
+        Session::put('cartBox', $sessCart);
 
-        //dd($_SESSION['cartBox']);
-
-        Session::put('cartBox');
-        Session::all();
-
-        $a = Session::get('cartBox');
-        var_dump($a);
-
-        // $form = Items::all();
-        // return redirect()->intended('/')-> with(['form' => $form]);
+        $form = Items::all();
+        return redirect()->intended('/')-> with(['form' => $form]);
     }
 
     /**
@@ -54,20 +54,36 @@ class CartController extends Controller
      **/
     public function displayCart(Request $request)
     {
-        $displayItems = Session::get('id');
+        $displayItems = Session::get('cartBox');
+        $tableItems = Items::all();
 
-        var_dump($displayItems);
+        $countBox = count($displayItems);
 
-        // foreach($displayItems as $item){
-        //     $increment = 0;
+        for($i=0; $i<$countBox; $i++){
+            $id = $displayItems[$i];
+            $qty = $displayItems[$i];
 
-        //     $b = Items::find($item['cartBox'][$increment] ->cartId);
-        //     dd($b);
-        //     $increment++;
-        // }
+            var_dump($displayItems[0]);
+            // var_dump($id);
+            // var_dump($qty);
 
-        //return view('cart.cart',['displayItems' => $displayItems]);
+            //$item = Items::find($tableItems -> $id);
 
+            //var_dump($item);
+
+            // $carts[] = [
+            //     'id' => $id,
+            //     'name' => $item->items_name,
+            //     'desc' => $item->descriptions,
+            //     'qtity' => $qty,
+            //     'price' => $item->price];
+
+
+            // var_dump($carts);
+        }
+
+
+        //return view('cart.cart',['carts' => $carts]);
     }
 
     /**
@@ -91,7 +107,7 @@ class CartController extends Controller
      **/
     public function resetCart(Request $request)
     {
-        Session::flush();
+        Session::forget('cartBox');
 
         $form = Items::all();
         return redirect()->intended('/')-> with(['form' => $form]);
