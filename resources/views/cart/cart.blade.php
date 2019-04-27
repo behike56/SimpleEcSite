@@ -37,13 +37,19 @@
                         @endfor
                     </tbody>
                 </table>
-                <div><p>合計個数:{{$totalQty}}個</p></div>
-                <div><p>合計価格{{$totalPriceNoTax}}円（税抜き）</p></div>
+                <div style="float:right">
+                    <div><p>合計個数:{{$totalQty}}個</p></div>
+                    <div><p>合計価格{{$totalPriceNoTax}}円（税抜き）</p></div>
+                    <button class="btn btn-default">
+                        {{-- <a href="{{ action('Payment\PaymentController@shipping') }}"> --}}
+                            配送方法の選択へ
+                        {{-- </a> --}}
+                    </button>
+                </div>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
         @include('cart.footer')
     </body>
 </html>

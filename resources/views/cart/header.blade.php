@@ -29,7 +29,6 @@
                             <li><a href="#">menuC</a></li>
                         </ul>
                     </div>
-
                     <div style="float:right;">
                         <p>ログイン</p>
                         <div class="panel panel-success" style="width:150px">
