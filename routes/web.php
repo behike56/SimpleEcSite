@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/**
+ * 会計
+ * 発送方法の選択、支払い方法の選択、サンクスページ
+ **/
+Route::get('/addOrders', 'Payment\PaymentController@addOrders');
+Route::get('/shipping', 'Payment\PaymentController@shipping');
+Route::get('/settlement', 'Payment\PaymentController@settlement');
+Route::get('/thanks', 'Payment\PaymentController@thanks');
