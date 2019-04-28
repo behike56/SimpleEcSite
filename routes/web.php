@@ -10,7 +10,6 @@
   | contains the "web" middleware group. Now create something great!
   |
 */
-
 Auth::routes();
 
 /**
@@ -49,3 +48,11 @@ Route::post('/additem', 'Cart\CartController@addItem');
 
 Route::get('resetCart', 'Cart\CartController@resetCart');
 
+/**
+ * 会計
+ * 発送方法の選択、支払い方法の選択、サンクスページ
+ **/
+Route::get('/addOrders', 'Payment\PaymentController@addOrders');
+Route::get('/shipping', 'Payment\PaymentController@shipping');
+Route::get('/settlement', 'Payment\PaymentController@settlement');
+Route::get('/thanks', 'Payment\PaymentController@thanks');
