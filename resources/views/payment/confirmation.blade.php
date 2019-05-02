@@ -14,52 +14,55 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th width="10%">商品名</th>
-                            <th width="5%">個数</th>
-                            <th width="5%">単価</th>
-                            <th width="5%">金額</th>
+                            <th width="10%" style="text-align: center">商品名</th>
+                            <th width="5%" style="text-align: center">個数</th>
+                            <th width="5%" style="text-align: center">単価</th>
                         </tr>
                     </thead>
                     <tbody>
                         @for($i=0; $i<$countBox; $i++)
                             <tr>
-                                <td>{{ $carts[$i]['name'] }}</td>
-                                <td>{{ $carts[$i]['qtity'] }}</td>
-                                <td>{{ $carts[$i]['price'] }}</td>
+                                <td style="text-align: center">{{ $carts[$i]['name'] }}</td>
+                                <td style="text-align: right">{{ $carts[$i]['qtity'] }}</td>
+                                <td style="text-align: right">{{ $carts[$i]['price'] }}</td>
                             </tr>
                         @endfor
-                        <tr>
-                            <td>消費税：¥{{$totalTaxes}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{$kuroneko}}</td>
-                            <td>送料：¥{{ $shipping  }}</td>
-                        </tr>
-                        <tr><td>合計金額：¥{{$totalPrice}}</td></tr>
                     </tbody>
                 </table>
-
+                <table class="table">
+                    <tr>
+                        <td style="text-align: right">小計：¥{{$totalPriceNoTax}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">消費税：¥{{intval($tax)}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">送料：¥{{$shippingFee}}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">合計金額：¥{{intval($totalPriceNoTax+$tax+$shippingFee)}}</td>
+                    </tr>
+                </table>
                 <div class="panel panel-default">
 	                  <div class="panel-heading">
 		                    発送と支払い
 	                  </div>
 	                  <div class="panel-body">
-		                    <p>発送先住所</p>
-
-                        <p>発送方法</p>
-                        <p>支払い方法</p>
+		                    <p>発送先住所:   {{$address}}</p>
+                        <p>発送方法:  {{$shipping}}</p>
+                        <p>支払い方法:   {{$payMethod}}</p>
 	                  </div>
 	                  <div class="panel-footer">
-                            {{-- <a href="{{ action('Payment\PaymentController@shipping') }}"> --}}
-                            注文を取りやめる（カートの中身と選択された全てが取り消されます）
-                            {{-- </a> --}}
+                            <a href="{{ action('Payment\PaymentController@resetOrder') }}">
+                            注文を取りやめる（配送と支払いの選択をキャンセルし、カートページに戻ります。）
+                            </a>
 	                  </div>
                 </div>
                 <div style="float:right">
                     <button class="btn btn-default">
-                        {{-- <a href="{{ action('Payment\PaymentController@orderExcution') }}"> --}}
+                        <a href="{{ action('Payment\PaymentController@orderExcution') }}">
                         ご注文を確定する
-                        {{-- </a> --}}
+                        </a>
                     </button>
                 </div>
             </div>

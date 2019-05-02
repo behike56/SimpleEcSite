@@ -55,32 +55,16 @@ class CartController extends Controller
     public function displayCart(Request $request)
     {
         $displayItems = Session::get('cartBox');
-        // var_dump($displayItems[0]['cartId']);
-        // var_dump($displayItems[0]['cartQuantity']);
-        // $test[] =['a'=>1,'b'=>2, 'c'=>3];
-        // $test[] =['d'=>4,'e'=>5, 'f'=>6];
-
-        // var_dump($test);
-
-        $tableItems = Items::all();
-
         $countBox = count($displayItems);
 
         $totalQty = 0;
-
         $totalPriceNoTax = 0;
 
         for($i=0; $i<$countBox; $i++){
             $id = $displayItems[$i]['cartId'];
             $qty = $displayItems[$i]['cartQuantity'];
 
-            // var_dump($displayItems[0]);
-            // var_dump($id);
-            // var_dump($qty);
-
             $item = Items::find($id);
-
-            //var_dump($item);
 
             $carts[] = [
                 'id' => $id,
@@ -90,10 +74,15 @@ class CartController extends Controller
                 'price' => $item->price];
 
             $totalQty += $qty;
-            $totalPriceNoTax += $item->price;
-
+            $addPrice = $qty * $item->price;
+            $totalPriceNoTax += $addPrice;
         }
-        return view('cart.cart',['carts' => $carts, 'countBox' => $countBox, 'totalQty' => $totalQty, 'totalPriceNoTax' => $totalPriceNoTax]);
+
+        return view('cart.cart',
+                    ['carts' => $carts,
+                     'countBox' => $countBox,
+                     'totalQty' => $totalQty,
+                     'totalPriceNoTax' => $totalPriceNoTax]);
     }
 
     /**

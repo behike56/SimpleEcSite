@@ -12,41 +12,59 @@
             <nav class="navbar navbar-default" style="background-color: #FFFFFF;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar">a</span>
-                            <span class="icon-bar">b</span>
-                            <span class="icon-bar">c</span>
-                        </button>
                         <a class="navbar-brand" href="#">
                             <h1>Simple Garden</h1>
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbarEexample2">
                         <ul class="nav navbar-nav">
-                            <li><a href="#">menuA</a></li>
-                            <li><a href="#">menuB</a></li>
-                            <li><a href="#">menuC</a></li>
+                            <li><a href="#">このサイトについて</a></li>
+                            <li><a href="#">お問い合わせ</a></li>
+                            <li><a href="#">企業情報</a></li>
                         </ul>
                     </div>
                     <div style="float:right;">
-                        <p>ログイン</p>
-                        <div class="panel panel-success" style="width:150px">
-	                          <div class="panel-heading">
-                                <a href="{{ url('/displayCart') }}">
-		                                買い物カゴ
-                                </a>
-	                          </div>
-	                          <div class="panel-body">
-                                <button type="button" class="btn btn-primary btn-lg btn-block active">
-                                    <a href="{{ action('Cart\CartController@resetCart') }}">
-                                        RESET
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Right Side Of Navbar -->
+<ul class="navbar-nav ml-auto list-group">
+    {{-- 以下を追記 --}}
+    <!-- Authentication Links -->
+    {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
+    @guest
+    <li class="list-group-item"><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+    {{-- ログインしていたらユーザー名とログアウトボタンを表示 --}}
+                        @else
+    <li class="nav-item dropdown list-group-item">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+    </li>
+    @endguest
+    {{-- 以上までを追記 --}}
+    <li class="list-group-item">
+        <a href="{{ url('/displayCart') }}">
+		        買い物カゴ
+        </a>
+    </li>
+</ul>
+<button type="button" class="btn btn-primary btn-lg btn-block active">
+    <a href="{{ action('Cart\CartController@resetCart') }}">
+        RESET
+    </a>
+</button>
+        </div>
+        </div>
+        </div>
             </nav>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
