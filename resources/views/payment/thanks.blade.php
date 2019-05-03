@@ -12,6 +12,7 @@
         <p>ご購入ありがとうございます。</p>
         <p>ご注文内容をメールで送りました。</p>
         <p>ご確認ください。</p>
+        <p><a href="{{url('sample/mailable/preview')}}">メール送信確認</a></p>
         <div style="float:right">
             <button class="btn btn-default">
                 {{-- <a href="{{ action('Payment\PaymentController@shipping') }}"> --}}

@@ -41,9 +41,9 @@
                     <div><p>合計個数:{{$totalQty}}個</p></div>
                     <div><p>合計価格{{$totalPriceNoTax}}円（税抜き）</p></div>
                     <button class="btn btn-default">
-                        {{-- <a href="{{ action('Payment\PaymentController@shipping') }}"> --}}
+                        <a href="{{ action('Payment\PaymentController@shipping') }}">
                             配送方法の選択へ
-                        {{-- </a> --}}
+                        </a>
                     </button>
                 </div>
             </div>

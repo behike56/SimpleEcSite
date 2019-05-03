@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
 {
+    public $timestamps = false;
+
     /**
      * 複数代入しない属性
      *
@@ -40,7 +42,7 @@ class Orders extends Model
         'orderPhoneNumber' => 'required',
         'orderAddress' => 'required',
         'orderItems' => 'required',
-        'totalPrice' => 'required'
-        'delivery' => 'required',
+        'totalPrice' => 'required',
+        'delivery' => 'required'
     ];
 }
