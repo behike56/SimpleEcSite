@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use Session;
+
+use App\Mail\ThanksMail;
 
 use App\Items;
 use App\Users;
@@ -122,7 +125,6 @@ class PaymentController extends Controller
 
         $sessShipping = Session::get('shipping');
 
-        var_dump($sessShipping);
         $shipping = $sessShipping['0']['shipping'];
         $address = $sessShipping['0']['address'];
         $shippingFee = 300;
@@ -171,107 +173,66 @@ class PaymentController extends Controller
      * @param Request $request
      * @retrun redirect()
      **/
-    public function reset(Request $request)
+    public function resetOrder(Request $request)
     {
         Session::forget('shipping');
         Session::forget('settlement');
 
-        return redirect()->intended('/cart');
+        return redirect()->intended('/');
     }
-
 
     /**
-     * サンクスページ
-     * @var 
+     * 注文の実行
+     * 1. store data to DB.
+     * 2. send an e-mail.
+     * 3. reset the session with three keys.
+     * @param Request $request
+     * @var array $form 商品情報
      * @return view('items.itemlist')
+     * @return array $form
+     * @table 
      **/
-    public function thanks()
+    public function orderExecution(Request $request)
     {
+        use 
 
+        $users = Auth::user();
+        $orderName = $users->name;
+        $orderEmail = $users->email;
+        $orderPhoneNumber = $users->phoneNumber;
+        $orderAddress = $users->address;
 
-        return view('payment.thanks');
+        $forms = $request->all();
+        $cartItems = Session::get('cartBox');
+        $countBox = count($cartItems);
+
+        $orderItems = '';
+
+        for($i=0; $i<$countBox; $i++){
+            $name = $forms['itemName'.$i];
+            $qtity = $forms['itemQtity'.$i];
+
+            $item = '#'.$name.'&&&'.$qtity.'_';
+            $orderItems .= $item;
+        }
+
+        $totalPrice = $forms['totalPrice'];
+        $delivery = $forms['shipping'];
+        $payMethod = $forms['payMethod'];
+
+        $orders = new Orders;
+        $orders->fill([
+            'orderName' => $orderName,
+            'orderEmail' => $orderEmail,
+            'orderPhoneNumber' => $orderPhoneNumber,
+            'orderAddress' => $orderAddress,
+            'orderItems' => $orderItems,
+            'totalPrice' => $totalPrice,
+            'delivery' => $delivery,
+            'payMethod' => $payMethod
+        ]);
+        $orders->save();
+
+        return view('payment.thanks')->with(url('sample/mailable/send'));
     }
-
-    // /**
-    //  * 注文の実行
-    //  * 1. store data to DB.
-    //  * 2. send an e-mail.
-    //  * 3. reset the session with three keys.
-    //  * @param Request $request
-    //  * @var array $form 商品情報
-    //  * @return view('items.itemlist')
-    //  * @return array $form
-    //  * @table 
-    //  **/
-    // public function orderExecution(Request $request)
-    // {
-    //     $orderItems = Session::get('cartBox');
-
-    //     $countBox = count($displayItems);
-    //     $orderItems = '';
-
-    //     for($i=0; $i<$countBox; $i++){
-    //         $id = $displayItems[$i]['cartId'];
-    //         $qty = $displayItems[$i]['cartQuantity'];
-    //         $orderItems += $id.'&&&'.$qty.'_';
-    //     }
-
-    //     $orderShipping = Session::get('shipping');
-    //     $orderSettlement = Session::get('settlement');
-
-
-
-    // $customers = Customers::all();
-
-    // $orderName = $customers->name;
-    // $orderEmail = $customers->email;
-    // $orderPhoneNumber = $customers->phoneNumber;
-    // $orderAddress = $customer->address;
-    // $delivery = $request->delivery;
-
-    // $shippingInfo = [
-    //     'orderName' => $orderName,
-    //     'orderEmail' => $orderEmail,
-    //     'orderPhoneNumber' => $orderPhoneNumber,
-    //     'orderAddress' => $orderAddress,
-    //     'delivery' => $delivery
-    // ];
-
-    // $sessOrders = Session::get('shipping');
-    // $sessOrders[] = $shippingInfo;
-    // Session::put('shipping', $sessOrders); 
-
-
-    //     //セッションの注文情報をDBへ保存する
-    //     $orders = new Orders;
-    //     $orderInfo = $request->all();
-
-    //     $orders->fill([
-    //         'items_name' => $form['items_name'],
-    //     ]);
-
-    //     $orders->save();
-
-    //     //注文完了メールを送信する
-
-    //     //セッション（カート、オーダー）をリセットする
-    // }
-
-    // /**
-    //  * 支払い方法の選択
-    //  * 支払い合計金額の確認
-    //  * @param Request $request
-    //  * @var array $form 商品情報
-    //  * @return view('items.itemlist')
-    //  * @return array $form
-    //  * @table 
-    //  **/
-    // public function settlement(Request $request)
-    // {
-    //     //customerテーブルから住所を参照する
-
-    //     //
-    //     $form = Items::all();
-    //     return view('payment.dettlement', ['form' => $form]);
-    // }
 }

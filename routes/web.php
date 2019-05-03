@@ -38,15 +38,24 @@ Route::get('/shipping', 'Payment\PaymentController@shipping')->middleware('auth'
 Route::post('/addShipping', 'Payment\PaymentController@addShipping')->middleware('auth');
 Route::post('/settlement', 'Payment\PaymentController@addShipping');
 
-Route::post('/addSettlement', 'Payment\PaymentController@addSettlement');
+Route::post('/addSettlement', 'Payment\PaymentController@addSettlement')->middleware('auth');
 Route::post('/confirmation', 'Payment\PaymentController@addSettlement');
 
 Route::get('resetShipping', 'Payment\PaymentController@resetShipping');
 Route::get('resetSettlement', 'Payment\PaymentController@resetSettlement');
 Route::get('resetOrder', 'Payment\PaymentController@resetOrder');
 
-Route::get('/thanks', 'Payment\PaymentController@thanks');
+Route::post('/orderExecution', 'Payment\PaymentController@orderExecution')->middleware('auth');
+Route::post('/thanks', 'Payment\PaymentController@orderExecution');
 
+
+/**
+ * メール送信
+ **/
+Route::get('sample/mailable/preview', function () {
+    return new App\Mail\ThanksMail();
+});
+Route::get('sample/mailable/send', 'MailTestController@ThanksMail');
 
 /**
  * 商品の追加

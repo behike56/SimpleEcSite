@@ -59,6 +59,7 @@ class CartController extends Controller
 
         $totalQty = 0;
         $totalPriceNoTax = 0;
+        $carts=[];
 
         for($i=0; $i<$countBox; $i++){
             $id = $displayItems[$i]['cartId'];
@@ -78,11 +79,19 @@ class CartController extends Controller
             $totalPriceNoTax += $addPrice;
         }
 
+        var_dump($carts);
+
+        if($carts==[]){
+            return view('cart.emptyCart');
+        }
+
+        if($carts!=[]){
         return view('cart.cart',
                     ['carts' => $carts,
                      'countBox' => $countBox,
                      'totalQty' => $totalQty,
                      'totalPriceNoTax' => $totalPriceNoTax]);
+        }
     }
 
     /**

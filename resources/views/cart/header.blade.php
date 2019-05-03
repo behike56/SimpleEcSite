@@ -12,7 +12,7 @@
             <nav class="navbar navbar-default" style="background-color: #FFFFFF;">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="{{url('/')}}">
                             <h1>Simple Garden</h1>
                         </a>
                     </div>

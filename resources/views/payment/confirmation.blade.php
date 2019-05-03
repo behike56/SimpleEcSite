@@ -53,17 +53,30 @@
                         <p>支払い方法:   {{$payMethod}}</p>
 	                  </div>
 	                  <div class="panel-footer">
-                            <a href="{{ action('Payment\PaymentController@resetOrder') }}">
+                        <a href="{{ action('Payment\PaymentController@resetOrder') }}">
                             注文を取りやめる（配送と支払いの選択をキャンセルし、カートページに戻ります。）
-                            </a>
+                        </a>
 	                  </div>
                 </div>
+                <form action="{{ action('Payment\PaymentController@orderExecution') }}" method="post" enctype="multipart/form-data">
+                    @for($i=0; $i<$countBox; $i++)
+                        <input type="hidden" name="itemName{{$i}}" value="{{ $carts[$i]['name'] }}">
+                        <input type="hidden" name="itemQtity{{$i}}" value="{{ $carts[$i]['qtity'] }}">
+                        <input type="hidden" name="itemPrice{{$i}}" value="{{ $carts[$i]['price'] }}">
+                    @endfor
+                    <input type="hidden" name="shipping" value=" {{$shipping}}">
+                    <input type="hidden" name="payMethod" value="{{$payMethod}}">
+                    <input type="hidden" name="totalPrice" value="{{intval($totalPriceNoTax+$tax+$shippingFee)}}">
+                    <input type="submit" value="確定する" >
+                    {{ csrf_field() }}
+                </form>
+
                 <div style="float:right">
-                    <button class="btn btn-default">
-                        <a href="{{ action('Payment\PaymentController@orderExcution') }}">
-                        ご注文を確定する
-                        </a>
-                    </button>
+                    {{-- <button class="btn btn-default">
+                    <a href="{{ action('Payment\PaymentController@orderExecution') }}">
+                    ご注文を確定する
+                    </a>
+                    </button> --}}
                 </div>
             </div>
         </div>
