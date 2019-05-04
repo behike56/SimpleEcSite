@@ -194,8 +194,6 @@ class PaymentController extends Controller
      **/
     public function orderExecution(Request $request)
     {
-        use 
-
         $users = Auth::user();
         $orderName = $users->name;
         $orderEmail = $users->email;
@@ -233,6 +231,12 @@ class PaymentController extends Controller
         ]);
         $orders->save();
 
+        Session::forget('cartBox');
+        Session::forget('shipping');
+        Session::forget('settlement');
+
         return view('payment.thanks')->with(url('sample/mailable/send'));
     }
+
+
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
@@ -12,7 +11,7 @@ class ItemCreateController extends Controller
 
     /**
      * 商品追加ページ
-     * @return (''admin.create')
+     * @return ('admin.create')
      **/
     public function add()
     {
@@ -20,36 +19,34 @@ class ItemCreateController extends Controller
     }
 
     /**
-     * 商品データ作成
+     * 商品データ作成、保存
      * @param Request $request
-     * @var array $items 商品情報
-     * @var array $form Requestを含む
-     * @var time $imageNow 現在時間
-     * @return redirect('admin/index')
+     * @var array $items 商品情報テーブルインスタンス
+     * @var array $form $requestを含む
+     * @var time $imageNow 画像の名前をユニークにするために名前の先頭につける
+     * @var string $path 拡張子を含むファイル名
+     * @var string $trueName テーブルに保存されるファイル名
+     * @return redirect('/')
      * @table items
      **/
-    public function create(Request $request){
-
+    public function create(Request $request)
+    {
         $this->validate($request, Items::$rules);
 
         $items = new Items;
         $form = $request->all();
-
         $imageNow = Carbon::now();
-
 
         if (isset($form['items_image'])) {
             $path = $request->file('items_image')->getClientOriginalName();
             $trueName = $imageNow->format('Y-m-d_H:i:s').$path;
             $request->file('items_image')->storeAs('public/image/', $trueName);
 
-            
         } else {
             $items->items_image = null;
         }
-	
+
         unset($form['_token']);
-        /* 	unset($form['items_image']); */
         $items->timestamps = false;
 
         $items->fill([
@@ -61,22 +58,22 @@ class ItemCreateController extends Controller
             'stock' => $form['stock'],
             'price' => $form['price']
         ]);
-	
+
         $items->save();
-	
+
         return redirect('admin', ['']);
     }
 
     /**
-     * 商品データ作成
+     * 追加した商品一覧ページ
      * @param Request $request
      * @var array $form 商品情報
      * @return view('admin.list')
      * @return array $form
      * @table items
      **/
-    public function index(Request $request){
-
+    public function index(Request $request)
+    {
         $form = Items::all();
         return view('admin.list', ['form' => $form]);
     }

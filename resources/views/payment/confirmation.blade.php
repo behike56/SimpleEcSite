@@ -58,18 +58,20 @@
                         </a>
 	                  </div>
                 </div>
-                <form action="{{ action('Payment\PaymentController@orderExecution') }}" method="post" enctype="multipart/form-data">
-                    @for($i=0; $i<$countBox; $i++)
-                        <input type="hidden" name="itemName{{$i}}" value="{{ $carts[$i]['name'] }}">
-                        <input type="hidden" name="itemQtity{{$i}}" value="{{ $carts[$i]['qtity'] }}">
-                        <input type="hidden" name="itemPrice{{$i}}" value="{{ $carts[$i]['price'] }}">
-                    @endfor
-                    <input type="hidden" name="shipping" value=" {{$shipping}}">
-                    <input type="hidden" name="payMethod" value="{{$payMethod}}">
-                    <input type="hidden" name="totalPrice" value="{{intval($totalPriceNoTax+$tax+$shippingFee)}}">
-                    <input type="submit" value="確定する" >
-                    {{ csrf_field() }}
-                </form>
+                <div style="float: right">
+                    <form action="{{ action('Payment\PaymentController@orderExecution') }}" method="post" enctype="multipart/form-data">
+                        @for($i=0; $i<$countBox; $i++)
+                            <input type="hidden" name="itemName{{$i}}" value="{{ $carts[$i]['name'] }}">
+                            <input type="hidden" name="itemQtity{{$i}}" value="{{ $carts[$i]['qtity'] }}">
+                            <input type="hidden" name="itemPrice{{$i}}" value="{{ $carts[$i]['price'] }}">
+                        @endfor
+                        <input type="hidden" name="shipping" value=" {{$shipping}}">
+                        <input type="hidden" name="payMethod" value="{{$payMethod}}">
+                        <input type="hidden" name="totalPrice" value="{{intval($totalPriceNoTax+$tax+$shippingFee)}}">
+                        <input type="submit" value="確定する" >
+                        {{ csrf_field() }}
+                    </form>
+                </div>
 
                 <div style="float:right">
                     {{-- <button class="btn btn-default">

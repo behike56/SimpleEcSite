@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Items;
 
 use Illuminate\Http\Request;
@@ -10,9 +9,8 @@ class ItemsController extends Controller
 {
     /**
      * トップページ兼商品一覧ページ
-     *
      * @param Request $request
-     * @var array $form 商品情報
+     * @var array $form 全商品情報
      * @return view('items.itemlist')
      * @return array $form
      * @table items
@@ -25,11 +23,10 @@ class ItemsController extends Controller
 
     /**
      * 商品詳細表示
-     *
      * @param Request $request
      * @var array $form 指定されたIDに一致するレコード
      * @return view('items.details')
-     * @return array $form 商品情報
+     * @return array $form IDに一致した商品情報
      * @table items
      **/
     public function detail(Request $request)
@@ -48,7 +45,4 @@ class ItemsController extends Controller
     {
         return view('items.material_list');
     }
-
-
-    
 }

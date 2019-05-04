@@ -13,26 +13,21 @@
 	          <div class="col-md-12">
                 <div class="panel panel-default">
                     <form action="{{ action('Payment\PaymentController@addSettlement') }}" method="post" enctype="multipart/form-data">
-	                  <div class="panel-heading">
-		                    支払い方法の選択
-	                  </div>
-	                  <div class="panel-body">
-                        <input type="radio" name="payMethod" value="tyakubarai">着払い
-                        <input type="radio" name="payMethod" value="konbini-siharai">コンビニ支払い
-                        <input type="radio" name="payMethod" value="credit-card">クレジットカード支払い
-	                  </div>
-                    <div style="float:right">
-                        <input type="submit" value="支払い方法を決定する">
-                    </div>
-                    {{ csrf_field() }}
+	                      <div class="panel-heading">
+		                        支払い方法の選択
+	                      </div>
+	                      <div class="panel-body">
+                            <input type="radio" name="payMethod" value="tyakubarai">着払い
+                            <input type="radio" name="payMethod" value="konbini-siharai">コンビニ支払い
+                            <input type="radio" name="payMethod" value="credit-card">クレジットカード支払い
+	                      </div>
+                        <div style="float:right">
+                            <input type="submit" value="支払い方法を決定する">
+                        </div>
+                        {{ csrf_field() }}
                     </form>
                 </div>
                 <div style="float:right">
-                    <button class="btn btn-default">
-                        {{-- <a href="{{ action('Payment\PaymentController@toConfirmation') }}">
-                        ご注文内容の確認へ
-                        </a> --}}
-                    </button>
                 </div>
             </div>
         </div>

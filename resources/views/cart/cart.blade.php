@@ -10,7 +10,7 @@
     <body>
         @include('cart.header')
         <div class="container">
-	          <div class="col-md-10">
+	          <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
                         <tr>

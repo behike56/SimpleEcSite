@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Cart;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Illuminate\Session\Store;
-//use Illuminate\Support\Facades\Session;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 use App\Cart;
 use App\Items;
@@ -16,22 +13,18 @@ class CartController extends Controller
     /**
      * セッションに追加後、元のページに戻る
      * @param Request $request
-     * @var array $cartBox ２次元配列、セッションへ保存する
+     * @var array $cartInfo セッションへ保存する配列
      * @var array $form 配列、商品情報
      * @retrun 元来たページへ戻る
      **/
-    public function addItem(Request $request){
-
+    public function addItem(Request $request)
+    {
         if (!isset($_SESSION['cartBox'])) {
             $_SESSION['cartBox'] = [];
         }
 
         $id = $request->id;
         $qty = $request->quantity;
-
-        // var_dump($id);
-        // var_dump($qty);
-
         $cartInfo = [
             'cartId' => $id,
             'cartQuantity' => $qty];
@@ -41,7 +34,7 @@ class CartController extends Controller
         Session::put('cartBox', $sessCart);
 
         $form = Items::all();
-        return redirect()->intended('/')-> with(['form' => $form]);
+        return redirect()->intended('/')->with(['form' => $form]);
     }
 
     /**
@@ -59,9 +52,9 @@ class CartController extends Controller
 
         $totalQty = 0;
         $totalPriceNoTax = 0;
-        $carts=[];
+        $carts = [];
 
-        for($i=0; $i<$countBox; $i++){
+        for ($i = 0; $i < $countBox; $i++) {
             $id = $displayItems[$i]['cartId'];
             $qty = $displayItems[$i]['cartQuantity'];
 
@@ -79,67 +72,31 @@ class CartController extends Controller
             $totalPriceNoTax += $addPrice;
         }
 
-        var_dump($carts);
-
-        if($carts==[]){
+        if ($carts == []) {
             return view('cart.emptyCart');
         }
 
-        if($carts!=[]){
-        return view('cart.cart',
-                    ['carts' => $carts,
-                     'countBox' => $countBox,
-                     'totalQty' => $totalQty,
-                     'totalPriceNoTax' => $totalPriceNoTax]);
+        if ($carts != []) {
+            return view('cart.cart',
+                        ['carts' => $carts,
+                         'countBox' => $countBox,
+                         'totalQty' => $totalQty,
+                         'totalPriceNoTax' => $totalPriceNoTax]);
         }
-    }
-
-    /**
-     * 追加したアイテムの削除
-     * @param Request $request
-     * @param int $quantity
-     * @var array $orderItem
-     * @var int $orderQuantity
-     * @retrun
-     **/
-    public function deleteItem(Request $request, $itemId)
-    {
-
     }
 
     /**
      * 買い物カゴをリセット（セッションのクリア）
      * @param Request $request
-     * @var 
-     * @retrun
+     * @var array $form トップページ用の全ての商品情報
+     * @retrun redirect intended('/')
      **/
     public function resetCart(Request $request)
     {
         Session::forget('cartBox');
 
         $form = Items::all();
-        return redirect()->intended('/')-> with(['form' => $form]);
-    }
-
-    /**
-     * 合計点数を表示
-     * @param Request $request
-     * @var 
-     * @retrun
-     **/
-    public function shoTotalQuantity(Request $request)
-    {
-
-    }
-
-    /**
-     * 合計金額を表示
-     * @param Request $request
-     * @var 
-     * @retrun
-     **/
-    public function showTotalPrice(Request $request)
-    {
-  
+        return redirect()->intended('/')->with(['form' => $form]);
     }
 }
+

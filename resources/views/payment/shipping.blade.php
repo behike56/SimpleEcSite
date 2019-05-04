@@ -37,16 +37,6 @@
                     </div>
                     {{ csrf_field() }}
                 </form>
-                {{-- <button class="btn btn-default">
-                <a href="{{ action('Payment\PaymentController@toSettlement') }}">
-                支払い方法を選択する。
-                </a>
-                </button> --}}
-                <button type="button" class="btn btn-primary btn-lg btn-block active">
-                    <a href="{{ action('Payment\PaymentController@resetShipping') }}">
-                        SHIPPING RESET
-                    </a>
-                </button>
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
