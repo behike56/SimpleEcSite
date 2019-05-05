@@ -12,10 +12,12 @@ class CartController extends Controller
 {
     /**
      * セッションに追加後、元のページに戻る
-     * @param Request $request
+     * @param Request $request 
      * @var array $cartInfo セッションへ保存する配列
+     * @var array $sessCart $idと$qty含めてセッションへ保存する
      * @var array $form 配列、商品情報
-     * @retrun 元来たページへ戻る
+     * @retrun string 実行時のページ
+     * @return array 連想配列。商品テーブル
      **/
     public function addItem(Request $request)
     {
@@ -39,11 +41,14 @@ class CartController extends Controller
 
     /**
      * 買い物カゴの中身を表示
-     * @param Request $request
-     * @var array $displayItems ２次元配列、セッションから取り出し入れる
-     * @var array $talbeOfItems　配列、商品情報
-     * @retrun view('cart/cart')
-     * @return array 
+     * @param Request $request セッションを取り出す
+     * @var array $displayItems ２次元配列、表示させる商品情報idとqty
+     * @var $totalQty カートに入っている商品の数
+     * @var $totalPriceNoTax 合計金額（税別）
+     * @var $carts カートページに表示する全情報
+     * @return string カートが空の時のページのview
+     * @retrun string カートページのview
+     * @return array 連想配列。表示する情報
      **/
     public function displayCart(Request $request)
     {
@@ -89,7 +94,8 @@ class CartController extends Controller
      * 買い物カゴをリセット（セッションのクリア）
      * @param Request $request
      * @var array $form トップページ用の全ての商品情報
-     * @retrun redirect intended('/')
+     * @retrun string リセット後はトップページへ
+     * @return array 連想配列。商品テーブル
      **/
     public function resetCart(Request $request)
     {

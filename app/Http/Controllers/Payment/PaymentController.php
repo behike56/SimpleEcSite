@@ -229,14 +229,14 @@ class PaymentController extends Controller
             'delivery' => $delivery,
             'payMethod' => $payMethod
         ]);
+
         $orders->save();
 
         Session::forget('cartBox');
         Session::forget('shipping');
         Session::forget('settlement');
 
-        return view('payment.thanks')->with(url('sample/mailable/send'));
+        return view('payment.thanks');
     }
-
-
 }
+
