@@ -1,3 +1,4 @@
+{{-- admin.header --}}
 <nav class="navbar navbar-default" style="background-color: #FFFFFF;">
     <div class="container-fluid">
         <div class="navbar-header">

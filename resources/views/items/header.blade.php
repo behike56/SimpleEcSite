@@ -1,4 +1,4 @@
-{{-- item.header --}}
+{{-- items.header --}}
 <header>
     <div class="container">
         <nav class="navbar navbar-default" style="background-color: #FFFFFF;">
@@ -25,7 +25,7 @@
                                     {{ __('Logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
+                                    {{ csrf_field() }}
                                 </form>
                             </div>
                         </li>

@@ -12,21 +12,21 @@
                 <div class="col-md-10" style="margin:auto">
                 @if(request()->path()=='shipping')
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: 30%">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" style="width: 30%">
                             進捗：30% 
                         </div>
                     </div>
                 @endif
                 @if(request()->path()=='settlement')
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: 60%">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width: 60%">
                             進捗：60%
                         </div>
                     </div>
                 @endif
                 @if(request()->path()=='confirmation')
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width: 90%">
+                        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" style="width: 90%">
                             進捗：90%
                         </div>
                     </div>

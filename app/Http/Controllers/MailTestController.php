@@ -17,3 +17,4 @@ class MailTestController extends Controller
         Mail::to($to)->send(new ThanksMail($name, $text));
     }
 }
+

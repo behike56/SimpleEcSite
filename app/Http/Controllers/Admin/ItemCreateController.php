@@ -3,15 +3,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Items;
 use Carbon\Carbon;
+
+use App\Items;
+
 
 class ItemCreateController extends Controller
 {
-
     /**
      * 商品追加ページ
-     * @return ('admin.create')
+     * @return string view-file name
      **/
     public function add()
     {
@@ -20,13 +21,16 @@ class ItemCreateController extends Controller
 
     /**
      * 商品データ作成、保存
+     * 商品情報を商品テーブルへ保存する
+     * 画像のファイル名は同名ファイルを入力されても保存
+     * できるようにするため画像ファイル名の先頭に日付日時を付加する。
      * @param Request $request
-     * @var array $items 商品情報テーブルインスタンス
-     * @var array $form $requestを含む
-     * @var time $imageNow 画像の名前をユニークにするために名前の先頭につける
-     * @var string $path 拡張子を含むファイル名
-     * @var string $trueName テーブルに保存されるファイル名
-     * @return redirect('/')
+     * @var array string $form
+     * @var array $items
+     * @var string Carbon $imageNow
+     * @var string $path
+     * @var string $trueName
+     * @return string redirect('/')
      * @table items
      **/
     public function create(Request $request)
@@ -61,20 +65,20 @@ class ItemCreateController extends Controller
 
         $items->save();
 
-        return redirect('admin', ['']);
+        return redirect('admin')->with(['']);
     }
 
     /**
      * 追加した商品一覧ページ
-     * @param Request $request
-     * @var array $form 商品情報
-     * @return view('admin.list')
+     * @var array $form
+     * @return string view('admin.list')
      * @return array $form
      * @table items
      **/
-    public function index(Request $request)
+    public function index()
     {
         $form = Items::all();
-        return view('admin.list', ['form' => $form]);
+        return view('admin.list')->with(['form' => $form]);
     }
 }
+

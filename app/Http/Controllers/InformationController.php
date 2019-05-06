@@ -27,3 +27,4 @@ class InformationController extends Controller
         return view('etc.company');
     }
 }
+

@@ -12,12 +12,13 @@ class CartController extends Controller
 {
     /**
      * セッションに追加後、元のページに戻る
-     * @param Request $request 
-     * @var array $cartInfo セッションへ保存する配列
-     * @var array $sessCart $idと$qty含めてセッションへ保存する
-     * @var array $form 配列、商品情報
-     * @retrun string 実行時のページ
-     * @return array 連想配列。商品テーブル
+     * [cartBox => [$sessCart[$cartInfo]]]
+     * @param Request $request
+     * @var array $cartInfo $idと$qty
+     * @var array|array $sessCart
+     * @var array $form
+     * @retrun string view-file name
+     * @return array items table
      **/
     public function addItem(Request $request)
     {
@@ -41,22 +42,22 @@ class CartController extends Controller
 
     /**
      * 買い物カゴの中身を表示
-     * @param Request $request セッションを取り出す
-     * @var array $displayItems ２次元配列、表示させる商品情報idとqty
-     * @var $totalQty カートに入っている商品の数
-     * @var $totalPriceNoTax 合計金額（税別）
-     * @var $carts カートページに表示する全情報
-     * @return string カートが空の時のページのview
-     * @retrun string カートページのview
-     * @return array 連想配列。表示する情報
+     * @param Request $request
+     * @var array|array $displayItem
+     * @var string $totalQt
+     * @var string $totalPriceNoTax
+     * @var array $carts
+     * @return string view-file name
+     * @retrun string view-file name
+     * @return array|array $carts|string other
      **/
     public function displayCart(Request $request)
     {
         $displayItems = Session::get('cartBox');
         $countBox = count($displayItems);
 
-        $totalQty = 0;
-        $totalPriceNoTax = 0;
+        $totalQty = '';
+        $totalPriceNoTax = '';
         $carts = [];
 
         for ($i = 0; $i < $countBox; $i++) {
@@ -82,20 +83,21 @@ class CartController extends Controller
         }
 
         if ($carts != []) {
-            return view('cart.cart',
-                        ['carts' => $carts,
-                         'countBox' => $countBox,
-                         'totalQty' => $totalQty,
-                         'totalPriceNoTax' => $totalPriceNoTax]);
+            return view('cart.cart')->with(
+                ['carts' => $carts,
+                 'countBox' => $countBox,
+                 'totalQty' => $totalQty,
+                 'totalPriceNoTax' => $totalPriceNoTax]);
         }
     }
 
     /**
      * 買い物カゴをリセット（セッションのクリア）
      * @param Request $request
-     * @var array $form トップページ用の全ての商品情報
-     * @retrun string リセット後はトップページへ
-     * @return array 連想配列。商品テーブル
+     * @var array $form
+     * @retrun string redirect->intended
+     * @return array items table
+     * @table items
      **/
     public function resetCart(Request $request)
     {

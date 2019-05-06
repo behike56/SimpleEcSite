@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
-use Session;
 
 use App\Mail\ThanksMail;
 
@@ -15,50 +13,48 @@ use App\Items;
 use App\Users;
 use App\Orders;
 
-use App\Http\Controllers\Cart\CartController;
 
+/**
+ *改修予定：重複する機能あり
+ **/
 class PaymentController extends Controller
 {
     /**
      * 発送方法の選択
      * 発送先住所の選択
      * @param Request $request
-     * @var array $form 商品情報
-     * @return view('items.itemlist')
-     * @return array $form
-     * @table 
+     * @var array $users
+     * @return string view-file name
+     * @return array $users
+     * @table users
      **/
     public function shipping(Request $request)
     {
         $users = Auth::user();
-
-        return view('payment.shipping', ['users' => $users]);
+        return view('payment.shipping')->with(['users' => $users]);
     }
 
     /**
      * 発送情報をセッションへ保存
-     * loginしているユーザーの情報が必要
-     * @var $orderName
-     * @var $orderEmail
-     * @var $orderPhoneNumber
-     * @var $orderAddress
-     * @var $delivery
-     * @return view('items.itemlist')
-     * @table customers, items
+     * @var string $address
+     * @var string $shipping
+     * @var array $shippingInfo
+     * @return string view-file name
+     * @table items
      **/
     public function addShipping(Request $request)
     {
         if(!isset($_SESSION['shipping'])){
-            $_SESSION['shipping']=[];
+            $_SESSION['shipping'] = [];
         }
 
         $orders = $request->all();
 
-        if($orders['address']=='OTHER'){
+        if($orders['address'] == 'OTHER'){
             $address = $orders['addressTwo'];
         } 
 
-        if($orders['address']!='OTHER'){
+        if($orders['address'] != 'OTHER'){
             $address = $orders['address'];
         }
 
@@ -76,25 +72,28 @@ class PaymentController extends Controller
     }
 
     /**
-     * 支払い情報をセッションへ保存
-     * 確認ページに表示するデータを準備
-     * @var $totalPrice
-     * @var $payMethod
+     * 1. 支払い情報をセッションへ保存
+     * 2. 確認ページに表示するデータを準備
+     * @param Request $request
+     * @var string $payMethod
+     * @var array $settlementInfo
+     * @var string $tax
+     * @var 
      * @return view('items.itemlist')
      **/
     public function addSettlement(Request $request)
     {
         if(!isset($_SESSION['settlement'])){
-            $_SESSION['settlement']=[];
+            $_SESSION['settlement'] = [];
         }
 
         $orders = $request->all();
         $payMethod = $orders['payMethod'];
         $settlementInfo = ['payMethod' => $payMethod];
+
         $sessSettlement = Session::get('settlement');
         $sessSettlement[] = $settlementInfo;
         Session::put('settlement', $sessSettlement);
-
 
         $displayItems = Session::get('cartBox');
         $countBox = count($displayItems);
@@ -130,67 +129,29 @@ class PaymentController extends Controller
         $shippingFee = 300;
         $payMethod = $sessSettlement['0']['payMethod'];
 
-        return view('payment.confirmation',
-                    ['carts' => $carts,
-                     'countBox' => $countBox,
+        return view('payment.confirmation')
+            ->with(['carts' => $carts,
+                    'countBox' => $countBox,
                      'totalQty' => $totalQty,
-                     'totalPriceNoTax' => $totalPriceNoTax,
-                     'tax' => $tax,
-                     'shipping' => $shipping,
-                     'shippingFee' => $shippingFee,
-                     'address' => $address,
-                     'payMethod' => $payMethod]);
-    }
-
-    /**
-     * 発送の選択をリセット（セッションのクリア）
-     * @param Request $request
-     * @var 
-     * @retrun
-     **/
-    public function resetShipping(Request $request)
-    {
-        Session::forget('shipping');
-
-        return redirect()->intended('/');;
-    }
-
-    /**
-     * 支払いの選択をリセット（セッションのクリア）
-     * @param Request $request
-     * @var 
-     * @retrun
-     **/
-    public function resetSettlement(Request $request)
-    {
-        Session::forget('settlementInfo');
-
-        return redirect()->intended('/');
-    }
-
-    /**
-     * 発送と支払いの選択をリセット（セッションのクリア）
-     * @param Request $request
-     * @retrun redirect()
-     **/
-    public function resetOrder(Request $request)
-    {
-        Session::forget('shipping');
-        Session::forget('settlement');
-
-        return redirect()->intended('/');
+                    'totalPriceNoTax' => $totalPriceNoTax,
+                    'tax' => $tax,
+                    'shipping' => $shipping,
+                    'shippingFee' => $shippingFee,
+                    'address' => $address,
+                    'payMethod' => $payMethod]);
     }
 
     /**
      * 注文の実行
-     * 1. store data to DB.
-     * 2. send an e-mail.
-     * 3. reset the session with three keys.
+     * 1. 注文テーブルへ保存
+     * 2. 保存後セッションを削除
+     * 3. サンクスページへ遷移
      * @param Request $request
-     * @var array $form 商品情報
-     * @return view('items.itemlist')
-     * @return array $form
-     * @table 
+     * @var string $orderItems 商品名と個数の連結
+     * @var integer $orderPhoneNumber
+     * @var string $orderName, $orderEmail, $orderAddress, $totalPrice, $delivery, $payMethod
+     * @return string view-file name
+     * @table users
      **/
     public function orderExecution(Request $request)
     {
@@ -237,6 +198,41 @@ class PaymentController extends Controller
         Session::forget('settlement');
 
         return view('payment.thanks');
+    }
+
+    /**
+     * 発送の選択をリセット（セッションのクリア）
+     * @param Request $request
+     * @retrun string redirect->intended
+     **/
+    public function resetShipping(Request $request)
+    {
+        Session::forget('shipping');
+        return redirect()->intended('/');;
+    }
+
+    /**
+     * 支払いの選択をリセット（セッションのクリア）
+     * @param Request $request
+     * @retrun string redirect->intended
+     **/
+    public function resetSettlement(Request $request)
+    {
+        Session::forget('settlementInfo');
+        return redirect()->intended('/');
+    }
+
+    /**
+     * 発送と支払いの選択をリセット（セッションのクリア）
+     * @param Request $request
+     * @retrun  string redirect->intended
+     **/
+    public function resetOrder(Request $request)
+    {
+        Session::forget('shipping');
+        Session::forget('settlement');
+
+        return redirect()->intended('/');
     }
 }
 
