@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class GenerateFileName
 {
-    const SAVE_DIR = 'public/image/'
+    const SAVE_DIR = 'public/image/';
 
     /**
      * @var string
@@ -26,12 +26,13 @@ class GenerateFileName
      * public/image/に保存させる
      * @return int
      */
-    public function value(): string
+    public function outPutFileName(): string
     {
         $generateTime = Carbon::now();
-        $pathName = $this->fileName->getOriginalName();
-        $saveFileName =  self::SAVE_DIR.$generateTime->format('Y-m-d_H:i:s').$pathName;
+        $saveFileName =  self::SAVE_DIR.$generateTime
+                      ->format('Y-m-d_H:i:s').$this->fileName;
 
-        return $saveFileName
+        return $saveFileName;
     }
 }
+

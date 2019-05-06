@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
 use App\Items;
+use App\GenerateFileName;
 
 
 class ItemCreateController extends Controller
@@ -39,12 +40,13 @@ class ItemCreateController extends Controller
 
         $items = new Items;
         $form = $request->all();
-        $imageNow = Carbon::now();
+        $saveFileName = '';
 
         if (isset($form['items_image'])) {
-            $path = $request->file('items_image')->getClientOriginalName();
-            $trueName = $imageNow->format('Y-m-d_H:i:s').$path;
-            $request->file('items_image')->storeAs('public/image/', $trueName);
+            $fileName =  $request->file('items_image')->getClientOriginalName();
+            $saveFileName = new GenerateFileName($fileName);
+            $request->file('items_image')
+                ->store($saveFileName->outPutFileName());
 
         } else {
             $items->items_image = null;
@@ -55,7 +57,7 @@ class ItemCreateController extends Controller
 
         $items->fill([
             'items_name' => $form['items_name'],
-            'items_image' => $trueName,
+            'items_image' => substr_replace($saveFileName->outPutFileName(), '', 0,13),
             'flowering_time' => $form['flowering_time'],
             'full_length' => $form['full_length'],
             'descriptions' => $form['descriptions'],
