@@ -1,12 +1,11 @@
 <?php
-
 namespace App;
 
 use Carbon\Carbon;
 
 class GenerateFileName
 {
-    const SAVE_DIR = 'public/image/';
+    const TIME_FORMAT = 'Y-m-d_H:i:s';
 
     /**
      * @var string
@@ -29,8 +28,8 @@ class GenerateFileName
     public function outPutFileName(): string
     {
         $generateTime = Carbon::now();
-        $saveFileName =  self::SAVE_DIR.$generateTime
-                      ->format('Y-m-d_H:i:s').$this->fileName;
+        $saveTime = $generateTime->format(self::TIME_FORMAT);
+        $saveFileName =  $saveTime.$this->fileName;
 
         return $saveFileName;
     }

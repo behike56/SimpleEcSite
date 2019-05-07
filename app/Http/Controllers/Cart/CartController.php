@@ -56,8 +56,8 @@ class CartController extends Controller
         $displayItems = Session::get('cartBox');
         $countBox = count($displayItems);
 
-        $totalQty = '';
-        $totalPriceNoTax = '';
+        $totalQty = 0;
+        $totalPriceNoTax = 0;
         $carts = [];
 
         for ($i = 0; $i < $countBox; $i++) {

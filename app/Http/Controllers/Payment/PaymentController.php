@@ -2,12 +2,9 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-
-use App\Mail\ThanksMail;
+use Illuminate\Support\Facades\Session;
 
 use App\Items;
 use App\Users;

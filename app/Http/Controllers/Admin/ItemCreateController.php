@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use App\Items;
 use App\GenerateFileName;
 
-
 class ItemCreateController extends Controller
 {
     /**
@@ -40,13 +39,14 @@ class ItemCreateController extends Controller
 
         $items = new Items;
         $form = $request->all();
-        $saveFileName = '';
 
         if (isset($form['items_image'])) {
             $fileName =  $request->file('items_image')->getClientOriginalName();
-            $saveFileName = new GenerateFileName($fileName);
-            $request->file('items_image')
-                ->store($saveFileName->outPutFileName());
+
+            $generateName = new GenerateFileName($fileName);
+            $saveFileName = $generateName->outPutFileName();
+
+            $request->file('items_image')->storeAs('public/image/', $saveFileName);
 
         } else {
             $items->items_image = null;
@@ -57,7 +57,7 @@ class ItemCreateController extends Controller
 
         $items->fill([
             'items_name' => $form['items_name'],
-            'items_image' => substr_replace($saveFileName->outPutFileName(), '', 0,13),
+            'items_image' => $saveFileName,
             'flowering_time' => $form['flowering_time'],
             'full_length' => $form['full_length'],
             'descriptions' => $form['descriptions'],
