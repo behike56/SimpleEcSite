@@ -1,4 +1,6 @@
 # SimpleEcSIte
+Heroku https://gentle-wildwood-27826.herokuapp.com/
+
 ## はじめに
 このプロダクトはtech boostのPHPのカリキュラム受講後に卒業制作物として制作。  
 ECサイトに最低限必要と思われる機能のみ実装した。  
