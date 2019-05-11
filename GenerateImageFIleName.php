@@ -3,7 +3,7 @@ namespace App;
 
 use Carbon\Carbon;
 
-class GenerateFileName
+class GenerateImageFileName
 {
     const TIME_FORMAT = 'Y-m-d_H:i:s';
 
@@ -13,7 +13,7 @@ class GenerateFileName
     private $fileName;
 
     /**
-     * GenerateFileName constructor.
+     * GenerateImageFileName constructor.
      * @param string $filename
      */
     public function __construct(string $fileName)
@@ -22,8 +22,7 @@ class GenerateFileName
     }
 
     /**
-     * public/image/に保存させる
-     * @return int
+     * @return string
      */
     public function outPutFileName(): string
     {

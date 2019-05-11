@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
 use App\Items;
-use App\GenerateFileName;
+use App\GenerateImageFileName;
 
 class ItemCreateController extends Controller
 {
@@ -43,7 +43,7 @@ class ItemCreateController extends Controller
         if (isset($form['items_image'])) {
             $fileName =  $request->file('items_image')->getClientOriginalName();
 
-            $generateName = new GenerateFileName($fileName);
+            $generateName = new GenerateImageFileName($fileName);
             $saveFileName = $generateName->outPutFileName();
 
             $request->file('items_image')->storeAs('public/image/', $saveFileName);

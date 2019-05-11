@@ -17,12 +17,12 @@ class CartController extends Controller
      * @var array $cartInfo $idと$qty
      * @var array|array $sessCart
      * @var array $form
-     * @retrun string view-file name
+     * @return string view-file name
      * @return array items table
      **/
     public function addItem(Request $request)
     {
-        if (!isset($_SESSION['cartBox'])) {
+        if (!Session::has('cartBox') {
             $_SESSION['cartBox'] = [];
         }
 
@@ -48,7 +48,7 @@ class CartController extends Controller
      * @var string $totalPriceNoTax
      * @var array $carts
      * @return string view-file name
-     * @retrun string view-file name
+     * @return string view-file name
      * @return array|array $carts|string other
      **/
     public function displayCart(Request $request)
@@ -78,11 +78,11 @@ class CartController extends Controller
             $totalPriceNoTax += $addPrice;
         }
 
-        if ($carts == []) {
+        if (count($carts) <= 0) {
             return view('cart.emptyCart');
         }
 
-        if ($carts != []) {
+        if (count($carts) != 0) {
             return view('cart.cart')->with(
                 ['carts' => $carts,
                  'countBox' => $countBox,
@@ -95,7 +95,7 @@ class CartController extends Controller
      * 買い物カゴをリセット（セッションのクリア）
      * @param Request $request
      * @var array $form
-     * @retrun string redirect->intended
+     * @return string redirect->intended
      * @return array items table
      * @table items
      **/

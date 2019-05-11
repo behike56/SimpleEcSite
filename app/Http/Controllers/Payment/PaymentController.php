@@ -10,12 +10,13 @@ use App\Items;
 use App\Users;
 use App\Orders;
 
-
 /**
  *改修予定：重複する機能あり
  **/
 class PaymentController extends Controller
 {
+    const OTHER_ADDRESS = 'OTHER';
+
     /**
      * 発送方法の選択
      * 発送先住所の選択
@@ -41,17 +42,17 @@ class PaymentController extends Controller
      **/
     public function addShipping(Request $request)
     {
-        if(!isset($_SESSION['shipping'])){
+        if(!Session::has('shipping')){
             $_SESSION['shipping'] = [];
         }
 
         $orders = $request->all();
 
-        if($orders['address'] == 'OTHER'){
+        if($orders['address'] === self::OTHER_ADDRESS){
             $address = $orders['addressTwo'];
         } 
 
-        if($orders['address'] != 'OTHER'){
+        if($orders['address'] !== self::OTHER_ADDRESS){
             $address = $orders['address'];
         }
 
@@ -75,12 +76,11 @@ class PaymentController extends Controller
      * @var string $payMethod
      * @var array $settlementInfo
      * @var string $tax
-     * @var 
      * @return view('items.itemlist')
      **/
     public function addSettlement(Request $request)
     {
-        if(!isset($_SESSION['settlement'])){
+        if(!Session::has('settlement')){
             $_SESSION['settlement'] = [];
         }
 
