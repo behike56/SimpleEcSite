@@ -43,14 +43,8 @@ class ItemCreateController extends Controller
         $form = $request->all();
 
         if (isset($form['items_image'])) {
-            $fileName =  $request->file('items_image')->getClientOriginalName();
-
-            $generateName = new GenerateImageFileName($fileName);
-            $saveFileName = $generateName->outPutFileName();
-
-            $s3FileName = Storage::disk('s3')->putFile('/',$saveFileName,'public');
-            $imageFileName = Storage::disk('s3')->url($s3FileName);
-            $request->file('items_image')->$imageFileName;
+            $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
+            $items->items_image = Storage::disk('s3')->url($path);
 
         } else {
             $items->items_image = null;
@@ -61,7 +55,7 @@ class ItemCreateController extends Controller
 
         $items->fill([
             'items_name' => $form['items_name'],
-            'items_image' => $imageFileName,
+            'items_image' => $form['items_image']->getClientOriginalName(),
             'flowering_time' => $form['flowering_time'],
             'full_length' => $form['full_length'],
             'descriptions' => $form['descriptions'],
