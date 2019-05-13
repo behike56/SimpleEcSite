@@ -5,8 +5,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
+use Storage;
 use App\Items;
 use App\GenerateImageFileName;
+
 
 class ItemCreateController extends Controller
 {
@@ -46,7 +48,9 @@ class ItemCreateController extends Controller
             $generateName = new GenerateImageFileName($fileName);
             $saveFileName = $generateName->outPutFileName();
 
-            $request->file('items_image')->storeAs('public/image/', $saveFileName);
+            $s3FileName = Storage::disk('s3')->putFile('/',$saveFileName,'public');
+            $imageFileName = >Storage::disk('s3')->url($s3FileName);
+            $request->file('items_image')->$imageFileName;
 
         } else {
             $items->items_image = null;
@@ -57,7 +61,7 @@ class ItemCreateController extends Controller
 
         $items->fill([
             'items_name' => $form['items_name'],
-            'items_image' => $saveFileName,
+            'items_image' => $imageFileName,
             'flowering_time' => $form['flowering_time'],
             'full_length' => $form['full_length'],
             'descriptions' => $form['descriptions'],
