@@ -49,7 +49,7 @@ class ItemCreateController extends Controller
             $saveFileName = $generateName->outPutFileName();
 
             $s3FileName = Storage::disk('s3')->putFile('/',$saveFileName,'public');
-            $imageFileName = >Storage::disk('s3')->url($s3FileName);
+            $imageFileName = Storage::disk('s3')->url($s3FileName);
             $request->file('items_image')->$imageFileName;
 
         } else {
