@@ -8,7 +8,7 @@
                 @php
                 $image = $form->items_image;
                 @endphp
-                <img src="{{ url("/public/${image}") }}" class="img-rounded" width="100%" height="100%">
+                <img src="{{ $form->items_image  }}" class="img-rounded" width="100%" height="100%">
             </div>
             <div class="col-md-6">
                 <table class="table table-striped">

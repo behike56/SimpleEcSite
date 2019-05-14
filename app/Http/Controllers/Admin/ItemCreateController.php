@@ -9,7 +9,6 @@ use Storage;
 use App\Items;
 use App\GenerateImageFileName;
 
-
 class ItemCreateController extends Controller
 {
     /**
