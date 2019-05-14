@@ -8,9 +8,6 @@
         </div>
         <div class="row">
             @foreach($form as $infos)
-                @php
-                $image = $infos->items_image;
-                @endphp
                 <div class="col-xs-10 col-md-4">
                     <div class="thumbnail" style="text-align:center; padding-top:10px; padding-bottom: 10px;">
                         <a href="{{ action('Items\ItemsController@detail', ['id' => $infos->id]) }}">
