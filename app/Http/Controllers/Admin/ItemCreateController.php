@@ -47,7 +47,7 @@ class ItemCreateController extends Controller
         // if (isset($form['items_image'])) {
              $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
              $items->items_image = Storage::disk('s3')->url($path);
-             var_dump($itms->items_image);
+             var_dump($items->items_image);
         // } else {
         //     $items->items_image = null;
         // }
