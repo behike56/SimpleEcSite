@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label class="col-md-2" for="items_image">画像</label>
                         <div class="col-md-10">
-                            <input type="file" class="form-control-file" accept="image/*" name="items_image">
+                            <input type="file" class="form-control-file" name="items_image">
                         </div>
                     </div>
                     {{ csrf_field() }}
