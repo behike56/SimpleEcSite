@@ -8,10 +8,13 @@
         </div>
         <div class="row">
             @foreach($form as $infos)
+                @php
+                $image = $infos->items_image;
+                @endphp
                 <div class="col-xs-10 col-md-4">
                     <div class="thumbnail" style="text-align:center; padding-top:10px; padding-bottom: 10px;">
                         <a href="{{ action('Items\ItemsController@detail', ['id' => $infos->id]) }}">
-                            <img src="{{ url("/public/${infos->items_mage}" }}" style="width:250px; height:150px;">
+                            <img src="{{ url("/public/${image}" }}" style="width:250px; height:150px;">
                         </a>
                         <div class="caption">
                             <p><b>{{ str_limit($infos->items_name, 20) }}</b></p>

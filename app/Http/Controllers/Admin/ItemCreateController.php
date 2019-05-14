@@ -23,6 +23,7 @@ class ItemCreateController extends Controller
 
     /**
      * 商品データ作成、保存
+     * herokuへのデプロイのため、クラスGenerateImageFileNameの使用を中止。
      * 商品情報を商品テーブルへ保存する
      * 画像のファイル名は同名ファイルを入力されても保存
      * できるようにするため画像ファイル名の先頭に日付日時を付加する。
