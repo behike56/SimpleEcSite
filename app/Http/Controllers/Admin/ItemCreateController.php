@@ -9,6 +9,7 @@ use Storage;
 use App\Items;
 use App\GenerateImageFileName;
 
+
 class ItemCreateController extends Controller
 {
     /**
@@ -22,7 +23,6 @@ class ItemCreateController extends Controller
 
     /**
      * 商品データ作成、保存
-     * herokuへのデプロイのため、クラスGenerateImageFileNameの使用を中止。
      * 商品情報を商品テーブルへ保存する
      * 画像のファイル名は同名ファイルを入力されても保存
      * できるようにするため画像ファイル名の先頭に日付日時を付加する。
@@ -43,21 +43,23 @@ class ItemCreateController extends Controller
         $form = $request->all();
 
         if (isset($form['items_image'])) {
-            $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
-            $items->items_image = Storage::disk('s3')->url($path);
+            $fileName =  $request->file('items_image')->getClientOriginalName();
+
+            $generateName = new GenerateImageFileName($fileName);
+            $saveFileName = $generateName->outPutFileName();
+
+            $request->file('items_image')->storeAs('public/image/', $saveFileName);
 
         } else {
             $items->items_image = null;
         }
 
         unset($form['_token']);
-        unset($form['image']);
-
         $items->timestamps = false;
 
         $items->fill([
             'items_name' => $form['items_name'],
-            'items_image' => $form['items_image'],
+            'items_image' => $saveFileName,
             'flowering_time' => $form['flowering_time'],
             'full_length' => $form['full_length'],
             'descriptions' => $form['descriptions'],
