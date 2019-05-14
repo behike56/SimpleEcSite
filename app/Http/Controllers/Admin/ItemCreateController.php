@@ -51,17 +51,21 @@ class ItemCreateController extends Controller
         }
 
         unset($form['_token']);
+        unset($form['image']);
+
         $items->timestamps = false;
 
-        $items->fill([
-            'items_name' => $form['items_name'],
-            'items_image' => $form['items_image']->getClientOriginalName(),
-            'flowering_time' => $form['flowering_time'],
-            'full_length' => $form['full_length'],
-            'descriptions' => $form['descriptions'],
-            'stock' => $form['stock'],
-            'price' => $form['price']
-        ]);
+        $items->fill($form);
+
+        // $items->fill([
+        //     'items_name' => $form['items_name'],
+        //     'items_image' => $form['items_image'],
+        //     'flowering_time' => $form['flowering_time'],
+        //     'full_length' => $form['full_length'],
+        //     'descriptions' => $form['descriptions'],
+        //     'stock' => $form['stock'],
+        //     'price' => $form['price']
+        // ]);
 
         $items->save();
 
