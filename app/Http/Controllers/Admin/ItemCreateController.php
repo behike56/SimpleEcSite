@@ -57,7 +57,7 @@ class ItemCreateController extends Controller
 
         // $items->timestamps = false;
 
-        // $items->fill($form);
+        $items->fill($form);
 
         // $items->fill([
         //     'items_name' => $form['items_name'],
@@ -69,8 +69,8 @@ class ItemCreateController extends Controller
         //     'price' => $form['price']
         // ]);
 
-        // $items->save();
-
+        $items->save();
+        var_dump("######".$items->items_image);
         // return redirect('admin')->with(['']);
     }
 
