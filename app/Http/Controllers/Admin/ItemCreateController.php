@@ -42,20 +42,22 @@ class ItemCreateController extends Controller
         $items = new Items;
         $form = $request->all();
 
-        if (isset($form['items_image'])) {
-            $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
-            $items->items_image = Storage::disk('s3')->url($path);
+        var_dump($form['items_image']);
 
-        } else {
-            $items->items_image = null;
-        }
+        // if (isset($form['items_image'])) {
+             $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
+             $items->items_image = Storage::disk('s3')->url($path);
+             var_dump($itms->items_image);
+        // } else {
+        //     $items->items_image = null;
+        // }
 
-        unset($form['_token']);
-        unset($form['image']);
+        // unset($form['_token']);
+        // unset($form['image']);
 
-        $items->timestamps = false;
+        // $items->timestamps = false;
 
-        $items->fill($form);
+        // $items->fill($form);
 
         // $items->fill([
         //     'items_name' => $form['items_name'],
@@ -67,9 +69,9 @@ class ItemCreateController extends Controller
         //     'price' => $form['price']
         // ]);
 
-        $items->save();
+        // $items->save();
 
-        return redirect('admin')->with(['']);
+        // return redirect('admin')->with(['']);
     }
 
     /**
