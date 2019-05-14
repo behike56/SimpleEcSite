@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('storage/image/' . $form->items_image) }}" class="img-rounded" width="100%" height="100%">
+                <img src="{{ $form->items_image }}" class="img-rounded" width="100%" height="100%">
             </div>
             <div class="col-md-6">
                 <table class="table table-striped">
@@ -36,22 +36,22 @@
                     <p>価格：{{ $form->price }}円（税別）</p>
 
                     <form class="form-inline" method="post" action="{{ url('/additem') }}>
-                                 <div class="form-group">
-                        <label class="sr-only" for="InputEmail">個数</label>
-                        <div class="input-group">
-                            <span class="input-group-addon">個数</span>
-                            <input type="hidden" value="{{$form->id}}" name="id">
-                            <input type="number" class="form-control" onInput="checkForm(this)" name="quantity" style="width:60px">
-                            <span class="input-group-addon">個</span>
+                        <div class="form-group">
+                            <label class="sr-only" for="InputEmail">個数</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">個数</span>
+                                <input type="hidden" value="{{$form->id}}" name="id">
+                                <input type="number" class="form-control" onInput="checkForm(this)" name="quantity" style="width:60px">
+                                <span class="input-group-addon">個</span>
+                            </div>
+                            <button type="submit" class="btn btn-default">
+                                カートに入れる
+                            </button>
+                            {{ csrf_field() }}
                         </div>
-                        <button type="submit" class="btn btn-default">
-                            カートに入れる
-                        </button>
-                        {{ csrf_field() }}
-                </div>
                     </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
