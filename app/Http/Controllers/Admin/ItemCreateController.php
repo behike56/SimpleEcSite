@@ -47,6 +47,7 @@ class ItemCreateController extends Controller
         // if (isset($form['items_image'])) {
              $path = Storage::disk('s3')->putFile('/',$form['items_image'],'public');
              $items->items_image = Storage::disk('s3')->url($path);
+
              var_dump("######".$items->items_image);
         // } else {
         //     $items->items_image = null;
@@ -57,17 +58,17 @@ class ItemCreateController extends Controller
 
         $items->timestamps = false;
 
-        $items->fill($form);
+        //$items->fill($form);
 
-        // $items->fill([
-        //     'items_name' => $form['items_name'],
-        //     'items_image' => $form['items_image'],
-        //     'flowering_time' => $form['flowering_time'],
-        //     'full_length' => $form['full_length'],
-        //     'descriptions' => $form['descriptions'],
-        //     'stock' => $form['stock'],
-        //     'price' => $form['price']
-        // ]);
+        $items->fill([
+            'items_name' => $form['items_name'],
+            'items_image' => $path,
+            'flowering_time' => $form['flowering_time'],
+            'full_length' => $form['full_length'],
+            'descriptions' => $form['descriptions'],
+            'stock' => $form['stock'],
+            'price' => $form['price']
+        ]);
 
         $items->save();
         var_dump("######".$items->items_image);
