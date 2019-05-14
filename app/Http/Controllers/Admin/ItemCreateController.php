@@ -55,7 +55,7 @@ class ItemCreateController extends Controller
         // unset($form['_token']);
         // unset($form['image']);
 
-        // $items->timestamps = false;
+        $items->timestamps = false;
 
         $items->fill($form);
 
