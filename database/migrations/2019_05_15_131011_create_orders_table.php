@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('orderEmail');
             $table->string('orderPhoneNumber');
             $table->string('orderAddress');
+
             $table->string('orderItems');
             $table->unsignedTinyInteger('totalPrice');
             $table->timestamp('created_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
