@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Items;
 use App\Users;
-use App\Orders;
+use App\Order;
 
 /**
  *改修予定：重複する機能あり
@@ -176,8 +176,8 @@ class PaymentController extends Controller
         $delivery = $forms['shipping'];
         $payMethod = $forms['payMethod'];
 
-        $orders = new Orders;
-        $orders->fill([
+        $order = new Order;
+        $order->fill([
             'orderName' => $orderName,
             'orderEmail' => $orderEmail,
             'orderPhoneNumber' => $orderPhoneNumber,
@@ -188,7 +188,7 @@ class PaymentController extends Controller
             'payMethod' => $payMethod
         ]);
 
-        $orders->save();
+        $order->save();
 
         Session::forget('cartBox');
         Session::forget('shipping');
