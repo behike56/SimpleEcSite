@@ -22,7 +22,7 @@ class CartController extends Controller
      **/
     public function addItem(Request $request)
     {
-        if (!Session::has('cartBox') {
+        if (!Session::has('cartBox')) {
             $_SESSION['cartBox'] = [];
         }
 
