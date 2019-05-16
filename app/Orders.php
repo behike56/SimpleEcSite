@@ -27,7 +27,7 @@ class Orders extends Model
         'orderItems',
         'totalPrice',
         'delivery',
-        'payMethod'
+        'paymethod'
     ];
 
     /**
