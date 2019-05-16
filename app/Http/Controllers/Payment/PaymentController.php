@@ -85,8 +85,8 @@ class PaymentController extends Controller
         }
 
         $orders = $request->all();
-        $paymethod = $orders['paymethod'];
-        $settlementInfo = ['paymethod' => $paymethod];
+        $payMethod = $orders['payMethod'];
+        $settlementInfo = ['payMethod' => $payMethod];
 
         $sessSettlement = Session::get('settlement');
         $sessSettlement[] = $settlementInfo;
@@ -124,18 +124,18 @@ class PaymentController extends Controller
         $shipping = $sessShipping['0']['shipping'];
         $address = $sessShipping['0']['address'];
         $shippingFee = 300;
-        $paymethod = $sessSettlement['0']['paymethod'];
+        $payMethod = $sessSettlement['0']['payMethod'];
 
         return view('payment.confirmation')
             ->with(['carts' => $carts,
                     'countBox' => $countBox,
-                     'totalQty' => $totalQty,
+                    'totalQty' => $totalQty,
                     'totalPriceNoTax' => $totalPriceNoTax,
                     'tax' => $tax,
                     'shipping' => $shipping,
                     'shippingFee' => $shippingFee,
                     'address' => $address,
-                    'paymethod' => $paymethod]);
+                    'payMethod' => $payMethod]);
     }
 
     /**
@@ -174,7 +174,7 @@ class PaymentController extends Controller
 
         $totalPrice = $forms['totalPrice'];
         $delivery = $forms['shipping'];
-        $paymethod = $forms['paymethod'];
+        $payMethod = $forms['payMethod'];
 
         $orders = new Orders;
         $orders->fill([
@@ -185,7 +185,7 @@ class PaymentController extends Controller
             'orderItems' => $orderItems,
             'totalPrice' => $totalPrice,
             'delivery' => $delivery,
-            'paymethod' => $paymethod
+            'payMethod' => $payMethod
         ]);
 
         $orders
