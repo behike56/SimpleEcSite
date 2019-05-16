@@ -85,8 +85,8 @@ class PaymentController extends Controller
         }
 
         $orders = $request->all();
-        $payMethod = $orders['payMethod'];
-        $settlementInfo = ['payMethod' => $payMethod];
+        $paymethod = $orders['paymethod'];
+        $settlementInfo = ['paymethod' => $paymethod];
 
         $sessSettlement = Session::get('settlement');
         $sessSettlement[] = $settlementInfo;
