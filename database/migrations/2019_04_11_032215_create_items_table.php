@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
 	    $table->string('flowering_time',40);
 	    $table->string('full_length',10);
 	    $table->string('descriptions',500);
-	    $table->string('items_image',30)->nullable();
+	    $table->string('items_image',100)->nullable();
 	    $table->unsignedTinyInteger('stock');
 	    $table->unsignedTinyInteger('price');
 	    $table->timestamp('created_time')->default(\DB::raw('CURRENT_TIMESTAMP'));

@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('orderItems');
             $table->unsignedTinyInteger('totalPrice');
             $table->string('delivery');
-            $table->string('payMethod')
+            $table->string('payMethod');
             $table->timestamp('created_time')->default(\DB::raw('CURRENT_TIMESTAMP'));
         });
     }
